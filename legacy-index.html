@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth text-[clamp(15px,0.875rem+0.2vw,17.5px)] motion-reduce:scroll-auto">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PVO - People Verdict Organization</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        screens: {
+          sm: '576px',
+          md: '768px',
+          lg: '992px',
+          xl: '1200px',
+          '2xl': '1400px',
+          '3xl': '1920px'
+        },
+        extend: {
+          colors: {
+            pvo: {
+              blue: '#01a0e2',
+              'blue-dark': '#0487f1',
+              'blue-soft': '#9cc4ea',
+              'blue-pale': '#eef4fc',
+              navy: '#10365f',
+              'navy-deep': '#0e2c55',
+              'navy-mid': '#3e5f8f',
+              slate: '#3c4a5a',
+              amber: '#fbb03b',
+              'amber-mid': '#fdc53f',
+              yellow: '#f5e85a',
+              'yellow-pill': '#fbd65b',
+              red: '#ee2b34',
+              'red-bright': '#fb0007',
+              'red-dark': '#c81f27',
+              text: '#37424f',
+              'text-light': '#5b6774',
+              muted: '#8d98a3',
+              surface: '#f8f8f8',
+              'surface-alt': '#fafafc',
+              parchment: '#f6f0e2',
+              border: '#e6e9ee',
+              footer: '#569dd5'
+            }
+          },
+          fontFamily: {
+            sans: ['Roboto', 'Montserrat', 'sans-serif']
+          },
+          boxShadow: {
+            'pvo-xs': '0 1px 4px rgba(22, 40, 66, 0.06)',
+            'pvo-sm': '0 2px 10px rgba(22, 40, 66, 0.07)',
+            'pvo-md': '0 6px 22px rgba(22, 40, 66, 0.1)',
+            'pvo-lg': '0 12px 34px rgba(22, 40, 66, 0.14)',
+            'pvo-brand': '8px 10px 18px rgba(22, 40, 66, 0.18)'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="overflow-x-hidden bg-white font-sans text-[clamp(0.85rem,0.82rem+0.12vw,0.9rem)] leading-[1.7] text-pvo-text antialiased [&_img]:block [&_svg]:block">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-[1000] w-full bg-white py-[clamp(0.45rem,0.9vw,0.8rem)] shadow-pvo-xs">
+    <div class="mx-auto flex w-[min(95vw,1500px)] items-center justify-between gap-4 px-[clamp(1rem,2vw,2rem)] max-[479px]:px-[0.9rem] 3xl:w-[min(88vw,1500px)]">
+      <a href="#home" class="shrink-0">
+        <img src="PVO-Logo-.png" alt="PVO - People Verdict Organization" class="h-[clamp(38px,4.5vw,80px)] w-auto max-[479px]:h-8">
+      </a>
+      <nav class="relative">
+        <ul class="js-nav-list absolute right-0 top-[calc(100%+0.6rem)] z-20 hidden min-w-[200px] flex-col items-start gap-2.5 rounded-[clamp(6px,0.5vw,9px)] bg-white px-[1.1rem] py-4 shadow-pvo-md max-[575px]:inset-x-0 max-[575px]:min-w-0 lg:static lg:flex lg:min-w-0 lg:flex-row lg:items-center lg:gap-[clamp(0.85rem,1.6vw,1.75rem)] lg:bg-transparent lg:p-0 lg:shadow-none">
+          <li><a href="#home" class="js-nav-link is-active relative whitespace-nowrap py-[0.3rem] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-medium uppercase tracking-[0.02em] text-pvo-slate transition-colors duration-300 hover:text-pvo-blue-dark after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-0 after:bg-pvo-blue-dark after:transition-transform after:content-[''] [&.is-active]:text-pvo-blue-dark [&.is-active]:after:scale-x-100">HOME</a></li>
+          <li><a href="#about" class="js-nav-link relative whitespace-nowrap py-[0.3rem] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-medium uppercase tracking-[0.02em] text-pvo-slate transition-colors duration-300 hover:text-pvo-blue-dark after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-0 after:bg-pvo-blue-dark after:transition-transform after:content-[''] [&.is-active]:text-pvo-blue-dark [&.is-active]:after:scale-x-100">ABOUT</a></li>
+          <li><a href="#team" class="js-nav-link relative whitespace-nowrap py-[0.3rem] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-medium uppercase tracking-[0.02em] text-pvo-slate transition-colors duration-300 hover:text-pvo-blue-dark after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-0 after:bg-pvo-blue-dark after:transition-transform after:content-[''] [&.is-active]:text-pvo-blue-dark [&.is-active]:after:scale-x-100">TEAM</a></li>
+          <li><a href="#services" class="js-nav-link relative whitespace-nowrap py-[0.3rem] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-medium uppercase tracking-[0.02em] text-pvo-slate transition-colors duration-300 hover:text-pvo-blue-dark after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-0 after:bg-pvo-blue-dark after:transition-transform after:content-[''] [&.is-active]:text-pvo-blue-dark [&.is-active]:after:scale-x-100">SERVICES</a></li>
+          <li><a href="#projects" class="js-nav-link relative whitespace-nowrap py-[0.3rem] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-medium uppercase tracking-[0.02em] text-pvo-slate transition-colors duration-300 hover:text-pvo-blue-dark after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-0 after:bg-pvo-blue-dark after:transition-transform after:content-[''] [&.is-active]:text-pvo-blue-dark [&.is-active]:after:scale-x-100">PROJECTS</a></li>
+          <li><a href="#contact" class="js-nav-link relative whitespace-nowrap py-[0.3rem] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-medium uppercase tracking-[0.02em] text-pvo-slate transition-colors duration-300 hover:text-pvo-blue-dark after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-0 after:bg-pvo-blue-dark after:transition-transform after:content-[''] [&.is-active]:text-pvo-blue-dark [&.is-active]:after:scale-x-100">CONTACT</a></li>
+        </ul>
+        <button type="button" class="js-nav-toggle flex flex-col gap-1 bg-transparent p-[5px] lg:hidden" aria-label="Toggle navigation">
+          <span class="block h-0.5 w-[22px] bg-pvo-slate"></span>
+          <span class="block h-0.5 w-[22px] bg-pvo-slate"></span>
+          <span class="block h-0.5 w-[22px] bg-pvo-slate"></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="w-full overflow-hidden bg-pvo-parchment" id="home">
+    <img src="PVO-Website-Banner-2.jpg" alt="Bapu 150 Celebration — when an event venue became a story" class="mx-auto h-auto w-full max-w-[1920px]">
+  </section>
+
+  <!-- Introduction -->
+  <section class="relative w-full overflow-hidden bg-white pb-[clamp(1.25rem,2vw,2rem)] pt-[clamp(2.5rem,4vw,4.25rem)] [@media(max-height:500px)_and_(orientation:landscape)]:py-[clamp(1.5rem,4vh,2.5rem)]" id="about">
+    <span class="pointer-events-none absolute left-[clamp(-10px,1vw,24px)] top-[clamp(6px,1vw,18px)] z-0 h-[clamp(50px,5vw,90px)] w-[clamp(90px,9vw,165px)]" aria-hidden="true">
+      <svg viewBox="0 0 170 90" fill="none" stroke-width="5" stroke-linecap="round" class="h-full w-full">
+        <path d="M8 62c-4-14 6-26 16-22s6 22-6 22-16-14-6-26" stroke="#f2c14e"/>
+        <path d="M40 58c-6-18 8-34 22-28s8 32-8 32-20-18-8-34" stroke="#f08b6a"/>
+        <path d="M74 46C66 20 92 2 112 12s10 40-10 40" stroke="#ef6f7b"/>
+      </svg>
+    </span>
+    <span class="pointer-events-none absolute right-[clamp(-60px,-3vw,-20px)] top-[clamp(-70px,-4vw,-30px)] z-0 size-[clamp(120px,11vw,190px)] rounded-full bg-[#cfe6e2]" aria-hidden="true"></span>
+    <span class="pointer-events-none absolute right-[clamp(50px,4.5vw,82px)] top-[clamp(70px,6.5vw,118px)] z-0 size-[clamp(38px,3.2vw,58px)] rounded-full bg-[#93aee4]" aria-hidden="true"></span>
+    <span class="pointer-events-none absolute right-[clamp(105px,9vw,160px)] top-[clamp(52px,4.6vw,84px)] z-0 size-[clamp(14px,1.1vw,20px)] rounded-full bg-[#a9d8e4]" aria-hidden="true"></span>
+    <div class="relative z-10 mx-auto w-[min(95vw,1500px)] px-[clamp(1rem,2vw,2rem)] max-[479px]:px-[0.9rem] 3xl:w-[min(88vw,1500px)]">
+      <h2 class="mb-[clamp(1rem,1.8vw,1.75rem)] text-center text-[clamp(1.5rem,1.25rem+0.85vw,2.24rem)] font-black uppercase leading-[1.15] tracking-[0.01em] text-pvo-slate">INTRODUCTION</h2>
+      <div class="mb-[clamp(1.25rem,2.2vw,2rem)] text-[clamp(0.85rem,0.82rem+0.12vw,0.9rem)] leading-[1.75] text-pvo-text-light [&_strong]:font-bold [&_strong]:text-pvo-text [&>p+p]:mt-[1.15em]">
+        <p>
+          Founded in 2010, <strong>People Verdict Organization</strong> is a premier Indian outreach and
+          political consulting agency with over <strong>15 years</strong> of impactful service. With its
+          roots deeply embedded in the ethos of democracy and public engagement, the organization was
+          conceptualized with a unique idea&mdash;to introduce concepts that connect leaders directly with
+          the people. This philosophy laid the foundation of our flagship brand, <strong>Janaadesh</strong>,
+          whose tagline resonates with this mission: &ldquo;Introducing Concepts that Connect.&rdquo;
+        </p>
+        <p>
+          Today, People Verdict Organization stands tall as one of India&rsquo;s most trusted names in
+          outreach and grassroots campaigning. With a track record of more than
+          <strong>3000+ on-ground campaign days,</strong> we have solidified our position as the
+          &ldquo;<strong>Ground Champion of India.</strong>&rdquo;
+        </p>
+      </div>
+
+      <div class="mt-[clamp(1.25rem,2.4vw,2.25rem)]">
+        <div class="mx-auto grid w-full grid-cols-1 rounded-[clamp(9px,0.75vw,14px)] bg-[linear-gradient(90deg,#fbb03b_0%,#fdc53f_34%,#f7dc4a_68%,#f5e85a_100%)] px-[clamp(0.75rem,1.5vw,1.5rem)] py-[clamp(0.4rem,0.8vw,0.7rem)] md:w-[92%] md:grid-cols-3 md:gap-0">
+          <span class="text-center text-[clamp(1.65rem,1.32rem+1.18vw,2.6rem)] font-black leading-[1.15] tracking-[-0.01em] text-pvo-slate">2010</span>
+          <span class="text-center text-[clamp(1.65rem,1.32rem+1.18vw,2.6rem)] font-black leading-[1.15] tracking-[-0.01em] text-pvo-slate">15+</span>
+          <span class="text-center text-[clamp(1.65rem,1.32rem+1.18vw,2.6rem)] font-black leading-[1.15] tracking-[-0.01em] text-pvo-slate">3000+</span>
+        </div>
+        <div class="mx-auto mt-[clamp(1rem,1.8vw,1.6rem)] grid max-w-[26rem] grid-cols-1 gap-8 md:max-w-none md:grid-cols-3 md:gap-[clamp(0.75rem,1.8vw,1.75rem)]">
+          <div class="relative flex flex-col items-center text-center">
+            <span class="pointer-events-none absolute -bottom-[clamp(20px,2.8vw,52px)] right-[46%] -z-10 hidden size-[clamp(200px,20vw,375px)] rounded-full bg-[linear-gradient(120deg,#c9e6d2_0%,#e2f0e8_55%,rgba(255,255,255,0)_100%)] md:block" aria-hidden="true"></span>
+            <span class="text-[clamp(1.02rem,0.965rem+0.21vw,1.16rem)] font-bold text-pvo-navy">Founded In</span>
+            <span class="mt-[0.35em] max-w-[17em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-normal text-pvo-text-light">Year of establishment</span>
+            <span class="mt-[clamp(0.9rem,1.8vw,1.6rem)] block size-[92px] md:size-[clamp(76px,8vw,148px)]">
+              <img src="Introduction/Icon 1.png" alt="" class="h-full w-full object-contain">
+            </span>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <span class="text-[clamp(1.02rem,0.965rem+0.21vw,1.16rem)] font-bold text-pvo-navy">Years of Service</span>
+            <span class="mt-[0.35em] max-w-[17em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-normal text-pvo-text-light">Impactful Service in Outreach and Political Consulting</span>
+            <span class="mt-[clamp(0.9rem,1.8vw,1.6rem)] block size-[92px] md:size-[clamp(76px,8vw,148px)]">
+              <img src="Introduction/Icon 2.png" alt="" class="h-full w-full object-contain">
+            </span>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <span class="text-[clamp(1.02rem,0.965rem+0.21vw,1.16rem)] font-bold text-pvo-navy">On-Ground Campaign Days</span>
+            <span class="mt-[0.35em] max-w-[17em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-normal text-pvo-text-light">Extensive track record of grassroots campaigning</span>
+            <span class="mt-[clamp(0.9rem,1.8vw,1.6rem)] block size-[92px] md:size-[clamp(76px,8vw,148px)]">
+              <img src="Introduction/Icon 3.png" alt="" class="h-full w-full object-contain">
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="h-[clamp(8px,0.8vw,15px)] w-full bg-pvo-blue" aria-hidden="true"></div>
+
+  <!-- Journey -->
+  <section class="relative w-full overflow-hidden bg-pvo-surface py-[clamp(2.5rem,4vw,4.25rem)] [@media(max-height:500px)_and_(orientation:landscape)]:py-[clamp(1.5rem,4vh,2.5rem)]">
+    <div class="relative z-10 mx-auto w-[min(95vw,1500px)] px-[clamp(1rem,2vw,2rem)] max-[479px]:px-[0.9rem] 3xl:w-[min(88vw,1500px)]">
+      <h2 class="mb-[clamp(1rem,1.8vw,1.75rem)] text-center text-[clamp(1.5rem,1.25rem+0.85vw,2.24rem)] font-black uppercase leading-[1.15] tracking-[0.01em] text-pvo-slate">JOURNEY</h2>
+      <div class="mb-[clamp(1.25rem,2.2vw,2rem)] text-[clamp(0.85rem,0.82rem+0.12vw,0.9rem)] leading-[1.75] text-pvo-text-light [&_strong]:font-bold [&_strong]:text-pvo-text">
+        <p>
+          The journey of People Verdict began in 2010 with a vision to transform political and public
+          outreach in India. Over the years, we have built a robust ecosystem of communication and
+          activation tools, consistently innovating in how leaders interact with citizens.
+          <br>
+          From humble beginnings to handling large-scale nationwide campaigns, the organization has grown
+          exponentially&mdash;diversifying into digital outreach, media, event management, and more. Our
+          deep understanding of rural and urban voter psychology has made us the preferred choice for many
+          state and central government projects, as well as political clients.
+        </p>
+      </div>
+
+      <div class="mt-[clamp(1.25rem,2.2vw,2rem)] mx-auto grid max-w-[22rem] grid-cols-1 items-stretch gap-[clamp(0.75rem,1.4vw,1.35rem)] sm:max-w-none sm:grid-cols-2 xl:grid-cols-4">
+        <article class="rounded-[clamp(9px,0.75vw,14px)] bg-pvo-blue p-[clamp(1rem,1.7vw,1.6rem)_clamp(0.9rem,1.5vw,1.4rem)] text-white shadow-pvo-md transition duration-300 hover:-translate-y-[3px] hover:shadow-pvo-md">
+          <span class="mb-[0.5em] inline-block rounded-[5px] bg-pvo-yellow-pill px-[0.35em] text-[clamp(1.18rem,1.08rem+0.34vw,1.42rem)] font-bold leading-tight text-pvo-slate">2009-10</span>
+          <h3 class="mb-[0.4em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold uppercase tracking-[0.01em] text-white">STARTED WITH PASSION</h3>
+          <p class="text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] leading-normal text-white/95">We have decided to follow our passion</p>
+        </article>
+        <article class="rounded-[clamp(9px,0.75vw,14px)] bg-white p-[clamp(1rem,1.7vw,1.6rem)_clamp(0.9rem,1.5vw,1.4rem)] shadow-pvo-sm transition duration-300 hover:-translate-y-[3px] hover:shadow-pvo-md">
+          <span class="mb-[0.5em] inline-block text-[clamp(1.18rem,1.08rem+0.34vw,1.42rem)] font-bold leading-tight text-pvo-slate">2014-15</span>
+          <h3 class="mb-[0.4em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold uppercase tracking-[0.01em] text-pvo-slate">YEAR OF CHANGE</h3>
+          <p class="text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] leading-normal text-pvo-text-light">These were the years, where wehave Identified our strength and code</p>
+        </article>
+        <article class="rounded-[clamp(9px,0.75vw,14px)] bg-white p-[clamp(1rem,1.7vw,1.6rem)_clamp(0.9rem,1.5vw,1.4rem)] shadow-pvo-sm transition duration-300 hover:-translate-y-[3px] hover:shadow-pvo-md">
+          <span class="mb-[0.5em] inline-block text-[clamp(1.18rem,1.08rem+0.34vw,1.42rem)] font-bold leading-tight text-pvo-slate">2016-18</span>
+          <h3 class="mb-[0.4em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold uppercase tracking-[0.01em] text-pvo-slate">YEAR OF INNOVATION</h3>
+          <p class="text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] leading-normal text-pvo-text-light">Kamal Mela, Kamal Jatre, Selfie with Modi</p>
+        </article>
+        <article class="rounded-[clamp(9px,0.75vw,14px)] bg-white p-[clamp(1rem,1.7vw,1.6rem)_clamp(0.9rem,1.5vw,1.4rem)] shadow-pvo-sm transition duration-300 hover:-translate-y-[3px] hover:shadow-pvo-md">
+          <span class="mb-[0.5em] inline-block text-[clamp(1.18rem,1.08rem+0.34vw,1.42rem)] font-bold leading-tight text-pvo-slate">2019</span>
+          <h3 class="mb-[0.4em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold uppercase tracking-[0.01em] text-pvo-slate">YEAR OF NARRATION</h3>
+          <p class="text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] leading-normal text-pvo-text-light">Bharat ke man ki baat, Aakansha Peti</p>
+        </article>
+      </div>
+
+      <div class="mt-[clamp(1rem,1.8vw,1.6rem)] flex justify-center gap-[0.45rem]">
+        <span class="size-2 cursor-pointer rounded-full border border-pvo-slate bg-pvo-slate"></span>
+        <span class="size-2 cursor-pointer rounded-full border border-[#9aa4ae] bg-transparent"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Services -->
+  <section class="relative w-full overflow-hidden bg-white py-[clamp(2.5rem,4vw,4.25rem)] [@media(max-height:500px)_and_(orientation:landscape)]:py-[clamp(1.5rem,4vh,2.5rem)]" id="services">
+    <span class="pointer-events-none absolute left-[clamp(-70px,-3.5vw,-30px)] top-[clamp(-80px,-4.5vw,-40px)] z-0 size-[clamp(130px,12vw,205px)] rounded-full bg-[#cfe6e2]" aria-hidden="true"></span>
+    <span class="pointer-events-none absolute left-[clamp(32px,2.8vw,52px)] top-[clamp(78px,7vw,128px)] z-0 size-[clamp(40px,3.4vw,62px)] rounded-full bg-[#93aee4]" aria-hidden="true"></span>
+    <span class="pointer-events-none absolute left-[clamp(84px,7vw,128px)] top-[clamp(56px,5vw,92px)] z-0 size-[clamp(15px,1.2vw,22px)] rounded-full bg-[#a9d8e4]" aria-hidden="true"></span>
+    <div class="relative z-10 mx-auto w-[min(95vw,1500px)] px-[clamp(1rem,2vw,2rem)] max-[479px]:px-[0.9rem] 3xl:w-[min(88vw,1500px)]">
+      <h2 class="mb-[clamp(1rem,1.8vw,1.75rem)] text-center text-[clamp(1.5rem,1.25rem+0.85vw,2.24rem)] font-black uppercase leading-[1.15] tracking-[0.01em] text-pvo-slate">OUR SERVICES</h2>
+      <p class="mx-auto mb-[clamp(1.25rem,2.2vw,2rem)] max-w-[46rem] text-center text-[clamp(0.85rem,0.82rem+0.12vw,0.9rem)] leading-[1.75] text-pvo-text-light">
+        We offer a comprehensive suite of services designed to meet every outreach requirement
+      </p>
+      <span class="mx-auto mb-[clamp(1.1rem,2vw,1.75rem)] block w-fit rounded-[5px] bg-pvo-amber-mid px-[1.5em] py-[0.35em] text-[clamp(0.92rem,0.885rem+0.14vw,0.99rem)] font-bold uppercase tracking-[0.02em] text-pvo-slate">IEC CAMPAIGN</span>
+
+      <div class="grid grid-cols-1 gap-[clamp(0.75rem,1.4vw,1.35rem)] md:grid-cols-2 lg:grid-cols-3">
+        <figure class="aspect-[1.1/1] overflow-hidden rounded-[clamp(9px,0.75vw,14px)] border-2 border-[#4a5561]">
+          <img src="PVO-Website-Banner-3.jpg" alt="IEC Campaign — branded LED vans for a Bihar agriculture outreach drive" class="h-full w-full object-cover object-[80%_center] transition duration-300 hover:scale-105">
+        </figure>
+        <figure class="aspect-[1.1/1] overflow-hidden rounded-[clamp(9px,0.75vw,14px)] border-2 border-[#4a5561]">
+          <img src="PVO-Website-Banner-5.jpg" alt="IEC Campaign — open-ground public gathering at Kamal Mela" class="h-full w-full object-cover object-[80%_center] transition duration-300 hover:scale-105">
+        </figure>
+        <figure class="aspect-[1.1/1] overflow-hidden rounded-[clamp(9px,0.75vw,14px)] border-2 border-[#4a5561] md:col-span-2 md:mx-auto md:w-full md:max-w-[50%] lg:col-span-1 lg:max-w-none">
+          <img src="PVO-Website-Banner-4.jpg" alt="IEC Campaign — rural audience at a Shravani Mela LED van activation" class="h-full w-full object-cover object-[80%_center] transition duration-300 hover:scale-105">
+        </figure>
+      </div>
+
+      <div class="mt-[clamp(1rem,1.8vw,1.6rem)] flex justify-center gap-[0.45rem]">
+        <span class="size-2 cursor-pointer rounded-full border border-pvo-slate bg-pvo-slate"></span>
+        <span class="size-2 cursor-pointer rounded-full border border-[#9aa4ae] bg-transparent"></span>
+        <span class="size-2 cursor-pointer rounded-full border border-[#9aa4ae] bg-transparent"></span>
+        <span class="size-2 cursor-pointer rounded-full border border-[#9aa4ae] bg-transparent"></span>
+        <span class="size-2 cursor-pointer rounded-full border border-[#9aa4ae] bg-transparent"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="h-[clamp(8px,0.8vw,15px)] w-full bg-pvo-blue" aria-hidden="true"></div>
+
+  <!-- Team & Management -->
+  <section class="relative w-full overflow-hidden bg-[linear-gradient(112deg,#ffffff_0%,#ffffff_42%,#eff4fc_100%)] py-[clamp(2.5rem,4vw,4.25rem)] [@media(max-height:500px)_and_(orientation:landscape)]:py-[clamp(1.5rem,4vh,2.5rem)]" id="team">
+    <span class="pointer-events-none absolute bottom-[clamp(-210px,-11vw,-110px)] left-[12%] z-0 hidden size-[clamp(320px,33vw,660px)] rounded-full border-[clamp(16px,1.5vw,30px)] border-[#f5f8fd] bg-transparent xl:block" aria-hidden="true"></span>
+    <span class="pointer-events-none absolute left-[clamp(-105px,-5.4vw,-55px)] top-[46%] z-0 hidden size-[clamp(110px,11vw,230px)] rounded-full border-[clamp(8px,0.85vw,15px)] border-pvo-blue bg-transparent xl:block" aria-hidden="true"></span>
+    <div class="relative z-10 mx-auto grid w-[min(95vw,1500px)] items-stretch gap-[clamp(1.75rem,4vw,2.75rem)] px-[clamp(1rem,2vw,2rem)] max-[479px]:px-[0.9rem] xl:grid-cols-[1fr_1.16fr] xl:gap-[clamp(1.5rem,2.6vw,2.5rem)] 3xl:w-[min(88vw,1500px)]">
+      <div class="flex flex-col items-start pt-[clamp(0.5rem,1.2vw,1.25rem)]">
+        <span class="mb-[0.6em] block text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-medium uppercase tracking-[0.03em] text-pvo-blue">PEOPLE. PURPOSE. PERFORMANCE</span>
+        <h2 class="text-[clamp(1.65rem,1.37rem+0.98vw,2.46rem)] font-black uppercase leading-[1.05] tracking-[0.01em] text-pvo-navy">TEAM &amp;<br>MANAGEMENT</h2>
+        <span class="mb-[clamp(0.9rem,1.6vw,1.35rem)] mt-[clamp(0.7rem,1.3vw,1.1rem)] block h-1 w-[clamp(34px,2.8vw,52px)] rounded-sm bg-pvo-blue"></span>
+        <p class="mb-[clamp(1rem,1.9vw,1.6rem)] max-w-none text-[clamp(0.85rem,0.82rem+0.12vw,0.9rem)] leading-[1.7] text-pvo-text-light xl:max-w-[34em]">
+          Our strength lies in our people. The People Verdict Organization is led by a core team of
+          passionate professionals and domain experts:
+        </p>
+        <a href="#team" class="inline-flex items-center gap-[0.75em] rounded-full bg-pvo-blue-dark py-[0.5em] pl-[1.35em] pr-[0.5em] text-[clamp(0.92rem,0.885rem+0.14vw,0.99rem)] font-bold leading-snug text-white transition duration-300 hover:bg-[#046fca] hover:shadow-pvo-md">
+          Meet Our Team
+          <span class="grid size-[2em] shrink-0 place-items-center rounded-full bg-pvo-navy text-white" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="size-[60%]"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <div class="mt-auto grid w-full grid-cols-1 gap-6 pt-[clamp(1.75rem,3.4vw,3.25rem)] md:grid-cols-3 md:gap-0">
+          <div class="border-t border-[#c9d4e2] px-[clamp(0.25rem,0.5vw,0.6rem)] pt-6 text-center first:border-t-0 first:pt-0 md:border-l md:border-t-0 md:pt-0 md:first:border-l-0">
+            <span class="mx-auto mb-[clamp(0.65rem,1.15vw,1.05rem)] block size-[clamp(32px,2.9vw,53px)] text-pvo-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" class="h-full w-full"><circle cx="11" cy="13" r="8"/><circle cx="11" cy="13" r="4.5"/><circle cx="11" cy="13" r="1.4" fill="currentColor" stroke="none"/><path d="M11 13 20.5 3.5M17 3.5h3.5V7"/></svg>
+            </span>
+            <h3 class="mb-[0.45em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold uppercase leading-snug tracking-[0.005em] text-pvo-navy">VISIONARY LEADERSHIP</h3>
+            <p class="text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] leading-normal text-pvo-text-light">Strategic thinkers with a people - first approach</p>
+          </div>
+          <div class="border-t border-[#c9d4e2] px-[clamp(0.25rem,0.5vw,0.6rem)] pt-6 text-center md:border-l md:border-t-0 md:pt-0">
+            <span class="mx-auto mb-[clamp(0.65rem,1.15vw,1.05rem)] block size-[clamp(32px,2.9vw,53px)] text-pvo-blue">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="h-full w-full"><path d="M12 11.2a3.1 3.1 0 1 0 0-6.2 3.1 3.1 0 0 0 0 6.2zm-6.2.6a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2zm12.4 0a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2zM12 12.6c-2.6 0-5.1 1.3-5.1 3.1V19h10.2v-3.3c0-1.8-2.5-3.1-5.1-3.1zM4.6 13.1C2.6 13.3.9 14.3.9 15.7V19h4.5v-3.3c0-.9.4-1.7 1-2.4a7 7 0 0 0-1.8-.2zm14.8 0c-.6 0-1.2.1-1.8.2.6.7 1 1.5 1 2.4V19h4.5v-3.3c0-1.4-1.7-2.4-3.7-2.6z"/></svg>
+            </span>
+            <h3 class="mb-[0.45em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold uppercase leading-snug tracking-[0.005em] text-pvo-navy">COLLABORATIVE CULTURE</h3>
+            <p class="text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] leading-normal text-pvo-text-light">Open communication, shared goals, stronger impact</p>
+          </div>
+          <div class="border-t border-[#c9d4e2] px-[clamp(0.25rem,0.5vw,0.6rem)] pt-6 text-center md:border-l md:border-t-0 md:pt-0">
+            <span class="mx-auto mb-[clamp(0.65rem,1.15vw,1.05rem)] block size-[clamp(32px,2.9vw,53px)] text-pvo-blue">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="h-full w-full"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.4-5.8-3-5.8 3 1.1-6.4L2.6 9.4l6.5-.9L12 2.6z"/></svg>
+            </span>
+            <h3 class="mb-[0.45em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold uppercase leading-snug tracking-[0.005em] text-pvo-navy">RESULTS THAT MATTER</h3>
+            <p class="text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] leading-normal text-pvo-text-light">Data- informed execution for public good</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <article class="relative mb-[clamp(0.85rem,1.5vw,1.35rem)] flex flex-col gap-[clamp(0.7rem,1.2vw,1.1rem)] overflow-hidden rounded-[clamp(9px,0.75vw,14px)] bg-pvo-navy-deep p-[clamp(0.6rem,1vw,0.95rem)] shadow-pvo-sm sm:flex-row">
+          <span class="pointer-events-none absolute -right-[clamp(26px,2.4vw,46px)] -top-[clamp(26px,2.4vw,46px)] size-[clamp(80px,7vw,120px)] rounded-full border-[clamp(7px,0.7vw,12px)] border-pvo-blue" aria-hidden="true"></span>
+          <div class="w-full shrink-0 self-stretch overflow-hidden rounded-[clamp(6px,0.5vw,9px)] sm:w-[clamp(112px,9.6vw,176px)]">
+            <img src="Team Images/ujjwal.jpg" alt="Ujjawal Singh, Chief Executive Officer" class="h-[200px] w-full object-cover min-[576px]:h-full min-[576px]:min-h-[clamp(100px,8vw,148px)]">
+          </div>
+          <div class="relative z-10 min-w-0 pr-[0.35rem] pt-[0.2rem]">
+            <span class="block text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-medium leading-tight text-white/85">CEO</span>
+            <h3 class="mt-[0.1em] text-[clamp(1.18rem,1.08rem+0.34vw,1.42rem)] font-bold leading-tight text-white">Ujjawal Singh</h3>
+            <span class="mt-[0.15em] block text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-medium leading-snug text-[#4fc0f5]">Engineer. MBA. Visionary Leader.</span>
+            <p class="mt-[0.85em] max-w-[46em] text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] leading-normal text-white/82">
+              By day, Ujjawal is a passionate marketing professional, steering our strategic acumen and a
+              relentless drive for success. With a sharp engineering mind and a robust business background,
+              he brings a unique blend of technical expertise and managerial prowess to the table.
+            </p>
+          </div>
+        </article>
+
+        <div class="grid grid-cols-1 gap-[clamp(0.75rem,1.3vw,1.2rem)] md:grid-cols-2">
+          <article class="flex flex-col gap-[clamp(0.7rem,1.2vw,1.1rem)] rounded-[clamp(9px,0.75vw,14px)] bg-white p-[clamp(0.6rem,1vw,0.95rem)] shadow-pvo-sm sm:flex-row">
+            <div class="w-full shrink-0 self-stretch overflow-hidden rounded-[clamp(6px,0.5vw,9px)] sm:w-[clamp(84px,7vw,126px)]">
+              <img src="Team Images/Abhishek Sir.jpeg" alt="Abhishek, Chief Operating Officer" class="h-[200px] w-full object-cover min-[576px]:h-full min-[576px]:min-h-[clamp(100px,8vw,148px)]">
+            </div>
+            <div class="min-w-0 pr-[0.35rem]">
+              <h3 class="text-[clamp(1.02rem,0.965rem+0.21vw,1.16rem)] font-bold leading-tight text-pvo-navy">Abhishek</h3>
+              <span class="relative mt-[0.15em] block pb-[0.45em] text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] font-medium leading-snug text-pvo-blue after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[clamp(20px,1.7vw,30px)] after:bg-pvo-blue after:content-['']">Chief Operating Officer</span>
+              <p class="mt-[0.7em] text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] leading-normal text-pvo-text-light">
+                16 years of experience in impactful rural government campaigns.
+                Empowering teams and driving continuous improvement.
+              </p>
+            </div>
+          </article>
+          <article class="flex flex-col gap-[clamp(0.7rem,1.2vw,1.1rem)] rounded-[clamp(9px,0.75vw,14px)] bg-white p-[clamp(0.6rem,1vw,0.95rem)] shadow-pvo-sm sm:flex-row">
+            <div class="w-full shrink-0 self-stretch overflow-hidden rounded-[clamp(6px,0.5vw,9px)] sm:w-[clamp(84px,7vw,126px)]">
+              <img src="Team Images/Anshu.jpg" alt="Aarti, Sr. Manager Tender &amp; Government Project" class="h-[200px] w-full object-cover min-[576px]:h-full min-[576px]:min-h-[clamp(100px,8vw,148px)]">
+            </div>
+            <div class="min-w-0 pr-[0.35rem]">
+              <h3 class="text-[clamp(1.02rem,0.965rem+0.21vw,1.16rem)] font-bold leading-tight text-pvo-navy">Aarti</h3>
+              <span class="relative mt-[0.15em] block pb-[0.45em] text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] font-medium leading-snug text-pvo-blue after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[clamp(20px,1.7vw,30px)] after:bg-pvo-blue after:content-['']">Sr.Manager Tender &amp; Goverment Project</span>
+              <p class="mt-[0.7em] text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] leading-normal text-pvo-text-light">
+                Aarti manages tenders and government projects with precision and expertise.
+                She ensures smooth execution, compliance, and timely delivery.
+              </p>
+            </div>
+          </article>
+          <article class="flex flex-col gap-[clamp(0.7rem,1.2vw,1.1rem)] rounded-[clamp(9px,0.75vw,14px)] bg-white p-[clamp(0.6rem,1vw,0.95rem)] shadow-pvo-sm sm:flex-row">
+            <div class="w-full shrink-0 self-stretch overflow-hidden rounded-[clamp(6px,0.5vw,9px)] sm:w-[clamp(84px,7vw,126px)]">
+              <img src="Team Images/ishu.jpg" alt="Ishwar, Business Planning &amp; Development" class="h-[200px] w-full object-cover min-[576px]:h-full min-[576px]:min-h-[clamp(100px,8vw,148px)]">
+            </div>
+            <div class="min-w-0 pr-[0.35rem]">
+              <h3 class="text-[clamp(1.02rem,0.965rem+0.21vw,1.16rem)] font-bold leading-tight text-pvo-navy">Ishwar</h3>
+              <span class="relative mt-[0.15em] block pb-[0.45em] text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] font-medium leading-snug text-pvo-blue after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[clamp(20px,1.7vw,30px)] after:bg-pvo-blue after:content-['']">Business Planning &amp; Development</span>
+              <p class="mt-[0.7em] text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] leading-normal text-pvo-text-light">
+                Passionate about travel, nature, and experiential marketing.
+                She brings creativity and fresh energy to every project.
+              </p>
+            </div>
+          </article>
+          <article class="flex flex-col gap-[clamp(0.7rem,1.2vw,1.1rem)] rounded-[clamp(9px,0.75vw,14px)] bg-white p-[clamp(0.6rem,1vw,0.95rem)] shadow-pvo-sm sm:flex-row">
+            <div class="w-full shrink-0 self-stretch overflow-hidden rounded-[clamp(6px,0.5vw,9px)] sm:w-[clamp(84px,7vw,126px)]">
+              <img src="Team Images/Avinash.jpg" alt="Avinash, Social Media Manager" class="h-[200px] w-full object-cover min-[576px]:h-full min-[576px]:min-h-[clamp(100px,8vw,148px)]">
+            </div>
+            <div class="min-w-0 pr-[0.35rem]">
+              <h3 class="text-[clamp(1.02rem,0.965rem+0.21vw,1.16rem)] font-bold leading-tight text-pvo-navy">Avinash</h3>
+              <span class="relative mt-[0.15em] block pb-[0.45em] text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] font-medium leading-snug text-pvo-blue after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-[clamp(20px,1.7vw,30px)] after:bg-pvo-blue after:content-['']">Social Media Manager</span>
+              <p class="mt-[0.7em] text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] leading-normal text-pvo-text-light">
+                Energetic and dedicated, Avinash drives social media campaigns with fresh ideas.
+                From Mission Pataliputra to Viksit Bharat, he consistently delivers strong results.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="h-[clamp(8px,0.8vw,15px)] w-full bg-pvo-blue" aria-hidden="true"></div>
+
+  <!-- Mission, Vision, Values -->
+  <section class="relative w-full overflow-hidden bg-pvo-surface-alt bg-[url(mvv-pattern.svg)] bg-[length:clamp(120px,9vw,175px)_auto] py-[clamp(2.5rem,4vw,4.25rem)] [@media(max-height:500px)_and_(orientation:landscape)]:py-[clamp(1.5rem,4vh,2.5rem)]">
+    <div class="relative z-10 mx-auto w-[min(95vw,1500px)] px-[clamp(1rem,2vw,2rem)] max-[479px]:px-[0.9rem] 3xl:w-[min(88vw,1500px)]">
+      <div class="mx-auto grid max-w-[34rem] grid-cols-1 gap-[clamp(1.75rem,4vw,2.5rem)] lg:max-w-none lg:grid-cols-3 lg:gap-0">
+        <article class="flex flex-col items-center border-t border-[#cdd6e2] px-[clamp(0.75rem,1.3vw,1.4rem)] pt-[clamp(1.75rem,4vw,2.5rem)] text-center first:border-t-0 first:pt-0 lg:border-l lg:border-t-0 lg:pt-0 lg:first:border-l-0">
+          <span class="mb-[clamp(0.9rem,1.7vw,1.5rem)] block size-[clamp(62px,6.2vw,113px)]">
+            <img src="Mission -Vission - Our Values/Mission.png" alt="" class="h-full w-full object-contain">
+          </span>
+          <h3 class="text-[clamp(1.18rem,1.08rem+0.34vw,1.42rem)] font-black uppercase tracking-[0.01em] text-pvo-slate">OUR <span class="text-pvo-blue">MISSION</span></h3>
+          <span class="relative my-[clamp(0.9rem,1.7vw,1.5rem)] block h-px w-[clamp(90px,7.5vw,130px)] bg-pvo-blue">
+            <span class="absolute left-1/2 top-1/2 size-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-pvo-blue"></span>
+          </span>
+          <span class="mb-[clamp(0.8rem,1.5vw,1.3rem)] block size-[clamp(32px,3vw,55px)] opacity-80">
+            <img src="Mission -Vission - Our Values/Mission 1.png" alt="" class="h-full w-full object-contain">
+          </span>
+          <p class="max-w-[30em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-relaxed text-pvo-text-light [&_strong]:font-bold [&_strong]:text-pvo-text">
+            To become <strong>India&rsquo;s top outreach agency,</strong> known for delivering
+            <strong>innovative concepts</strong> with the <strong>highest standards of integrity.</strong>
+          </p>
+        </article>
+        <article class="flex flex-col items-center border-t border-[#cdd6e2] px-[clamp(0.75rem,1.3vw,1.4rem)] pt-[clamp(1.75rem,4vw,2.5rem)] text-center lg:border-l lg:border-t-0 lg:pt-0">
+          <span class="mb-[clamp(0.9rem,1.7vw,1.5rem)] block size-[clamp(62px,6.2vw,113px)]">
+            <img src="Mission -Vission - Our Values/Vision.png" alt="" class="h-full w-full object-contain">
+          </span>
+          <h3 class="text-[clamp(1.18rem,1.08rem+0.34vw,1.42rem)] font-black uppercase tracking-[0.01em] text-pvo-slate">OUR <span class="text-pvo-red">VISION</span></h3>
+          <span class="relative my-[clamp(0.9rem,1.7vw,1.5rem)] block h-px w-[clamp(90px,7.5vw,130px)] bg-pvo-red">
+            <span class="absolute left-1/2 top-1/2 size-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-pvo-red"></span>
+          </span>
+          <span class="mb-[clamp(0.8rem,1.5vw,1.3rem)] block size-[clamp(32px,3vw,55px)] opacity-80">
+            <img src="Mission -Vission - Our Values/Vision 1.png" alt="" class="h-full w-full object-contain">
+          </span>
+          <p class="max-w-[30em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-relaxed text-pvo-text-light [&_strong]:font-bold [&_strong]:text-pvo-text">
+            To establish <strong>People Verdict Organization</strong> as the <strong>preferred agency</strong>
+            for all <strong>Central and State Government departments,</strong> offering reliable, creative,
+            and result-driven outreach
+          </p>
+        </article>
+        <article class="flex flex-col items-center border-t border-[#cdd6e2] px-[clamp(0.75rem,1.3vw,1.4rem)] pt-[clamp(1.75rem,4vw,2.5rem)] text-center lg:border-l lg:border-t-0 lg:pt-0">
+          <span class="mb-[clamp(0.9rem,1.7vw,1.5rem)] block size-[clamp(62px,6.2vw,113px)]">
+            <img src="Mission -Vission - Our Values/Values.png" alt="" class="h-full w-full object-contain">
+          </span>
+          <h3 class="text-[clamp(1.18rem,1.08rem+0.34vw,1.42rem)] font-black uppercase tracking-[0.01em] text-pvo-slate">OUR <span class="text-pvo-slate">VALUES</span></h3>
+          <span class="relative my-[clamp(0.9rem,1.7vw,1.5rem)] block h-px w-[clamp(90px,7.5vw,130px)] bg-pvo-slate">
+            <span class="absolute left-1/2 top-1/2 size-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-pvo-slate"></span>
+          </span>
+          <span class="mb-[clamp(0.8rem,1.5vw,1.3rem)] block size-[clamp(32px,3vw,55px)] opacity-80">
+            <img src="Mission -Vission - Our Values/Values 1.png" alt="" class="h-full w-full object-contain">
+          </span>
+          <p class="max-w-[30em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-relaxed text-pvo-text-light [&_strong]:font-bold [&_strong]:text-pvo-text">
+            To establish <strong>People Verdict Organization</strong> as the <strong>preferred agency</strong>
+            for all <strong>Central and State Government departments,</strong> offering reliable, creative,
+            and result-driven outreach
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="h-[clamp(8px,0.8vw,15px)] w-full bg-pvo-blue" aria-hidden="true"></div>
+
+  <!-- Empanelments -->
+  <section class="relative w-full overflow-hidden bg-white py-[clamp(2.5rem,4vw,4.25rem)] [@media(max-height:500px)_and_(orientation:landscape)]:py-[clamp(1.5rem,4vh,2.5rem)]">
+    <span class="pointer-events-none absolute right-[clamp(-70px,-3.5vw,-30px)] top-[clamp(-80px,-4.5vw,-40px)] z-0 size-[clamp(130px,12vw,205px)] rounded-full bg-[#cfe6e2]" aria-hidden="true"></span>
+    <span class="pointer-events-none absolute right-[clamp(32px,2.8vw,52px)] top-[clamp(78px,7vw,128px)] z-0 size-[clamp(40px,3.4vw,62px)] rounded-full bg-[#93aee4]" aria-hidden="true"></span>
+    <span class="pointer-events-none absolute right-[clamp(84px,7vw,128px)] top-[clamp(46px,4vw,74px)] z-0 size-[clamp(15px,1.2vw,22px)] rounded-full bg-[#a9d8e4]" aria-hidden="true"></span>
+    <div class="relative z-10 mx-auto grid w-[min(95vw,1500px)] items-center justify-items-center gap-[clamp(1.5rem,3.5vw,3.5rem)] px-[clamp(1rem,2vw,2rem)] text-center max-[479px]:px-[0.9rem] lg:grid-cols-2 lg:justify-items-stretch lg:text-left 3xl:w-[min(88vw,1500px)]">
+      <div>
+        <h2 class="mb-[clamp(1rem,1.8vw,1.75rem)] text-center text-[clamp(1.5rem,1.25rem+0.85vw,2.24rem)] font-black uppercase leading-[1.15] tracking-[0.01em] text-pvo-slate lg:text-left">EMPANELMENTS</h2>
+        <p class="mb-[clamp(1.25rem,2.2vw,2rem)] max-w-none text-[clamp(0.85rem,0.82rem+0.12vw,0.9rem)] leading-[1.75] text-pvo-text-light lg:max-w-[26em]">
+          These empanelments endorse our credibility, quality of service, and national capability to
+          deliver high-impact
+        </p>
+        <ul class="grid gap-[clamp(0.9rem,1.7vw,1.5rem)]">
+          <li class="flex items-start justify-center gap-[clamp(0.75rem,1.4vw,1.25rem)] text-left lg:justify-start">
+            <span class="size-[clamp(32px,2.9vw,53px)] shrink-0 text-[#5ab4e8]">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" class="h-full w-full"><path d="M24 3.5l4.2 3.6 5.3-1.5 2.3 5 5.4 1.2-.4 5.5 4.2 3.6-3.1 4.6 2 5.2-4.9 2.5-.7 5.5-5.5.4-2.9 4.7-5-2.3-4.4 3.4-3.8-4-5.5.9-1.6-5.3-5.3-1.7 1-5.4L1.4 24l3.6-4.2-1.5-5.3 5-2.3 1.2-5.4 5.5.4 3.6-4.2 4.6 3.1z"/></svg>
+            </span>
+            <div>
+              <h3 class="max-w-none text-[clamp(1.02rem,0.965rem+0.21vw,1.16rem)] font-bold leading-snug text-pvo-slate lg:max-w-[14em]">Directorate of Advertising and Visual Publicity (DAVP)</h3>
+            </div>
+          </li>
+          <li class="flex items-start justify-center gap-[clamp(0.75rem,1.4vw,1.25rem)] text-left lg:justify-start">
+            <span class="size-[clamp(32px,2.9vw,53px)] shrink-0 text-[#5ab4e8]">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round" class="h-full w-full"><rect x="7" y="17" width="34" height="27" rx="5"/><path d="M7 26h34"/><rect x="14" y="32" width="7" height="6" rx="1.6"/><rect x="27" y="32" width="7" height="6" rx="1.6"/><text x="24" y="24" font-size="9" font-family="Montserrat, sans-serif" font-weight="700" text-anchor="middle" fill="currentColor" stroke="none">NGO</text></svg>
+            </span>
+            <div>
+              <h3 class="max-w-none text-[clamp(1.02rem,0.965rem+0.21vw,1.16rem)] font-bold leading-snug text-pvo-slate lg:max-w-[14em]">5 State Governments</h3>
+              <p class="mt-[0.15em] max-w-none text-[clamp(0.85rem,0.82rem+0.12vw,0.9rem)] leading-normal text-pvo-text-light lg:max-w-[18em]">for specialized outreach and mobility solutions</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mx-auto grid w-[min(100%,clamp(300px,27vw,505px))] grid-cols-2 gap-[clamp(2px,0.3vw,6px)] lg:ml-auto lg:mr-0">
+        <span class="grid aspect-square place-items-center rounded-full border-[clamp(7px,0.72vw,13px)] border-pvo-navy-mid bg-white p-[clamp(12px,1.6vw,28px)] shadow-pvo-md">
+          <img src="Empanelments/Logo1.png" alt="DAVP — Directorate of Advertising and Visual Publicity" class="max-h-full max-w-full object-contain">
+        </span>
+        <span class="grid aspect-square place-items-center rounded-full border-[clamp(7px,0.72vw,13px)] border-pvo-blue-soft bg-white p-[clamp(12px,1.6vw,28px)] shadow-pvo-md">
+          <img src="Empanelments/Logo2.png" alt="Government of Bihar" class="max-h-full max-w-full object-contain">
+        </span>
+        <span class="grid aspect-square place-items-center rounded-full border-[clamp(7px,0.72vw,13px)] border-pvo-blue-soft bg-white p-[clamp(12px,1.6vw,28px)] shadow-pvo-md">
+          <img src="Empanelments/Logo3.png" alt="Government of Goa" class="max-h-full max-w-full object-contain">
+        </span>
+        <span class="grid aspect-square place-items-center rounded-full border-[clamp(7px,0.72vw,13px)] border-pvo-navy-mid bg-white p-[clamp(12px,1.6vw,28px)] shadow-pvo-md">
+          <img src="Empanelments/Logo4.png" alt="Government of Assam" class="max-h-full max-w-full object-contain">
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <div class="h-[clamp(8px,0.8vw,15px)] w-full bg-pvo-blue" aria-hidden="true"></div>
+
+  <!-- Case Studies -->
+  <section class="relative w-full overflow-hidden bg-pvo-surface py-[clamp(2.5rem,4vw,4.25rem)] [@media(max-height:500px)_and_(orientation:landscape)]:py-[clamp(1.5rem,4vh,2.5rem)]" id="projects">
+    <div class="relative z-10 mx-auto w-[min(95vw,1500px)] px-[clamp(1rem,2vw,2rem)] max-[479px]:px-[0.9rem] 3xl:w-[min(88vw,1500px)]">
+      <h2 class="mb-[clamp(1rem,1.8vw,1.75rem)] text-center text-[clamp(1.5rem,1.25rem+0.85vw,2.24rem)] font-black uppercase leading-[1.15] tracking-[0.01em] text-pvo-slate">CASE STUDIES &amp; HIGHLIGHTS</h2>
+
+      <div class="mx-auto mt-[clamp(1.25rem,2.2vw,2rem)] grid max-w-[28rem] grid-cols-1 gap-[clamp(1rem,2.2vw,2.25rem)] md:max-w-none md:grid-cols-2 lg:grid-cols-3">
+        <article class="text-center">
+          <div class="mb-[clamp(0.9rem,1.6vw,1.4rem)] aspect-[4/3] overflow-hidden rounded-[clamp(9px,0.75vw,14px)] border-2 border-[#5aa4e0]">
+            <img src="PVO-Website-Banner-2.jpg" alt="Bapu Jayanti — Gandhi Vichar Samagam stage event" class="h-full w-full object-cover object-[88%_center] transition duration-300 hover:scale-105">
+          </div>
+          <h3 class="mb-[0.6em] text-[clamp(0.92rem,0.885rem+0.14vw,0.99rem)] font-bold uppercase tracking-[0.02em] text-pvo-slate">BAPU JAYANTI</h3>
+          <p class="mx-auto max-w-[26em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-relaxed text-pvo-text-light">
+            Spearheaded awareness campaigns with thematic events, storytelling zones, and
+            message-driven creative installations.
+          </p>
+        </article>
+        <article class="text-center">
+          <div class="mb-[clamp(0.9rem,1.6vw,1.4rem)] aspect-[4/3] overflow-hidden rounded-[clamp(9px,0.75vw,14px)] border-2 border-[#5aa4e0]">
+            <img src="PVO-Website-Banner-1.jpg" alt="Jagannath Ji Yatra — roadside LED branding along the yatra route" class="h-full w-full object-cover object-[88%_center] transition duration-300 hover:scale-105">
+          </div>
+          <h3 class="mb-[0.6em] text-[clamp(0.92rem,0.885rem+0.14vw,0.99rem)] font-bold uppercase tracking-[0.02em] text-pvo-slate">JAGANNATH JI YATRA</h3>
+          <p class="mx-auto max-w-[26em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-relaxed text-pvo-text-light">
+            Organized laser light shows, experience zones, and branding outreach along the yatra route,
+            creating strong community connect.
+          </p>
+        </article>
+        <article class="text-center md:col-span-2 md:mx-auto md:w-full md:max-w-[50%] lg:col-span-1 lg:max-w-none">
+          <div class="mb-[clamp(0.9rem,1.6vw,1.4rem)] aspect-[4/3] overflow-hidden rounded-[clamp(9px,0.75vw,14px)] border-2 border-[#5aa4e0]">
+            <img src="PVO-Website-Banner-4.jpg" alt="Bihar Shravani Mela — Kanwar route outreach and crowd handling" class="h-full w-full object-cover object-[88%_center] transition duration-300 hover:scale-105">
+          </div>
+          <h3 class="mb-[0.6em] text-[clamp(0.92rem,0.885rem+0.14vw,0.99rem)] font-bold uppercase tracking-[0.02em] text-pvo-slate">BIHAR SHRAVANI MELA</h3>
+          <p class="mx-auto max-w-[26em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-relaxed text-pvo-text-light">
+            Successfully managed spiritual outreach and crowd handling through visual campaigns,
+            installations, and LED Vans across key Kanwar routes.
+          </p>
+        </article>
+      </div>
+
+      <div class="mt-[clamp(1rem,1.8vw,1.6rem)] flex justify-center gap-[0.45rem]">
+        <span class="size-2 cursor-pointer rounded-full border border-pvo-slate bg-pvo-slate"></span>
+        <span class="size-2 cursor-pointer rounded-full border border-[#9aa4ae] bg-transparent"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Brands -->
+  <section class="relative w-full overflow-hidden bg-white py-[clamp(2.5rem,4vw,4.25rem)] [@media(max-height:500px)_and_(orientation:landscape)]:py-[clamp(1.5rem,4vh,2.5rem)]">
+    <div class="relative z-10 mx-auto w-[min(95vw,1500px)] px-[clamp(1rem,2vw,2rem)] max-[479px]:px-[0.9rem] 3xl:w-[min(88vw,1500px)]">
+      <h2 class="mb-[clamp(1rem,1.8vw,1.75rem)] text-center text-[clamp(1.5rem,1.25rem+0.85vw,2.24rem)] font-black uppercase leading-[1.15] tracking-[0.01em] text-pvo-slate">OUR BRANDS</h2>
+
+      <div class="mx-auto mt-[clamp(1.5rem,2.6vw,2.4rem)] grid max-w-[56rem] grid-cols-1 gap-10 md:grid-cols-2 md:gap-[clamp(1.5rem,4vw,4rem)]">
+        <article class="text-center">
+          <span class="mx-auto mb-[clamp(1rem,1.9vw,1.6rem)] grid size-[clamp(150px,13.5vw,248px)] place-items-center rounded-full bg-[linear-gradient(140deg,#cfe8dc_0%,#bfdcea_45%,#a9c6ea_100%)] p-[clamp(0.8rem,1.4vw,1.35rem)] shadow-pvo-brand">
+            <img src="FINAL JANADESH LOGO DESIGN-01.png" alt="Janaadesh" class="max-h-full max-w-full object-contain">
+          </span>
+          <h3 class="mb-[0.5em] text-[clamp(1.02rem,0.965rem+0.21vw,1.16rem)] font-bold tracking-[0.02em] text-pvo-slate">JANAADESH</h3>
+          <p class="mb-[0.55em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-relaxed text-pvo-text-light">Political campaign planning and execution unit.</p>
+          <a href="https://www.janaadesh.co.in" class="text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold text-pvo-slate transition-colors duration-300 hover:text-pvo-blue-dark">www.janaadesh.co.in</a>
+        </article>
+        <article class="text-center">
+          <span class="mx-auto mb-[clamp(1rem,1.9vw,1.6rem)] grid size-[clamp(150px,13.5vw,248px)] place-items-center rounded-full bg-[linear-gradient(140deg,#cfe8dc_0%,#bfdcea_45%,#a9c6ea_100%)] p-[clamp(0.8rem,1.4vw,1.35rem)] shadow-pvo-brand">
+            <img src="Vistaar Print-01.png" alt="Vistaar Media" class="max-h-full max-w-full object-contain">
+          </span>
+          <h3 class="mb-[0.5em] text-[clamp(1.02rem,0.965rem+0.21vw,1.16rem)] font-bold tracking-[0.02em] text-pvo-slate">VISTAAR MEDIA</h3>
+          <p class="mb-[0.55em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-relaxed text-pvo-text-light">Creative, BTL, event and experience marketing division.</p>
+          <a href="https://www.vistaar.media" class="text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold text-pvo-slate transition-colors duration-300 hover:text-pvo-blue-dark">www.vistaar.media</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="w-full bg-pvo-footer pt-[clamp(1.75rem,3vw,2.75rem)] text-white" id="contact">
+    <div class="mx-auto grid w-[min(95vw,1500px)] grid-cols-1 gap-[clamp(1.25rem,3vw,3rem)] px-[clamp(1rem,2vw,2rem)] pb-[clamp(1rem,2vw,1.75rem)] max-[479px]:px-[0.9rem] md:grid-cols-2 lg:grid-cols-[1.15fr_0.65fr_1.2fr] 3xl:w-[min(88vw,1500px)]">
+      <div>
+        <h3 class="mb-[clamp(0.8rem,1.5vw,1.25rem)] text-[clamp(0.92rem,0.885rem+0.14vw,0.99rem)] font-bold">Corporate Office</h3>
+        <ul class="grid gap-[clamp(0.6rem,1.1vw,0.95rem)]">
+          <li class="flex items-start gap-[0.7rem] text-[clamp(0.92rem,0.885rem+0.14vw,0.99rem)] font-bold leading-snug">
+            <span class="mt-[0.15em] size-[clamp(15px,1.25vw,20px)] shrink-0">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="h-full w-full"><path d="M2.5 10.2c.3-2 1.4-3.2 3.3-3.9L7 8.6c.2.4.1.9-.3 1.2l-1 .7c.9 1.6 2.2 2.9 3.8 3.8l.7-1c.3-.4.8-.5 1.2-.3l2.3 1.2c-.7 1.9-1.9 3-3.9 3.3-3.9.5-8.1-3.4-7.3-7.3z"/><path d="M15.5 7h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1zm.8 2v1.4h4.4V9h-4.4zm0 2.6V13h4.4v-1.4h-4.4z"/></svg>
+            </span>
+            <a href="tel:+911204151246" class="hover:underline">(+91) 120 415 1246</a>
+          </li>
+          <li class="flex items-start gap-[0.7rem] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-snug">
+            <span class="mt-[0.15em] size-[clamp(15px,1.25vw,20px)] shrink-0">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="h-full w-full"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 8.1L4.3 7.4v1.9l7.7 5.7 7.7-5.7V7.4L12 13.1z"/></svg>
+            </span>
+            <a href="mailto:info@peopleverdict.org" class="italic hover:underline">info@peopleverdict.org</a>
+          </li>
+          <li class="flex items-start gap-[0.7rem] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-snug">
+            <span class="mt-[0.15em] size-[clamp(15px,1.25vw,20px)] shrink-0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="h-full w-full"><circle cx="12" cy="10" r="7.2"/><path d="M12 2.8v14.4M4.8 10h14.4M12 2.8c2 2 3 4.5 3 7.2s-1 5.2-3 7.2c-2-2-3-4.5-3-7.2s1-5.2 3-7.2z"/><path d="M9 20.5h6"/></svg>
+            </span>
+            <span>
+              <strong class="font-bold">Head office:</strong> Unit 901, Tower B, ITHUM TOWER,
+              Block A Industrial Area Sector 62, Noida Uttar Pradesh 201309
+            </span>
+          </li>
+        </ul>
+        <div class="mt-[clamp(0.9rem,1.7vw,1.5rem)] flex gap-[0.55rem]">
+          <a href="#" class="grid size-[clamp(22px,1.7vw,28px)] place-items-center rounded-[5px] bg-white text-pvo-footer transition duration-300 hover:-translate-y-0.5 hover:text-pvo-navy" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="size-[66%]"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3L10 15z"/></svg>
+          </a>
+          <a href="#" class="grid size-[clamp(22px,1.7vw,28px)] place-items-center rounded-[5px] bg-white text-pvo-footer transition duration-300 hover:-translate-y-0.5 hover:text-pvo-navy" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-[66%]"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" class="grid size-[clamp(22px,1.7vw,28px)] place-items-center rounded-[5px] bg-white text-pvo-footer transition duration-300 hover:-translate-y-0.5 hover:text-pvo-navy" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="size-[66%]"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.29-.04-1.27-.12-2.41-.12-2.39 0-4.03 1.46-4.03 4.14V9.9H7.5V13h2.76v8h3.24z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="mb-[clamp(0.8rem,1.5vw,1.25rem)] text-[clamp(0.92rem,0.885rem+0.14vw,0.99rem)] font-bold">Quick Links</h3>
+        <ul class="grid gap-[0.35rem]">
+          <li><a href="#home" class="text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] uppercase hover:underline">HOME</a></li>
+          <li><a href="#about" class="text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] uppercase hover:underline">ABOUT</a></li>
+          <li><a href="#team" class="text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] uppercase hover:underline">TEAM</a></li>
+          <li><a href="#services" class="text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] uppercase hover:underline">SERVICES</a></li>
+          <li><a href="#projects" class="text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] uppercase hover:underline">PROJECTS</a></li>
+          <li><a href="#contact" class="text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] uppercase hover:underline">CONTACT</a></li>
+        </ul>
+      </div>
+
+      <div class="md:col-span-2 md:max-w-[30rem] lg:col-span-1 lg:max-w-none">
+        <h3 class="mb-[clamp(0.8rem,1.5vw,1.25rem)] text-[clamp(0.92rem,0.885rem+0.14vw,0.99rem)] font-bold">Contact Us</h3>
+        <form class="js-contact-form grid gap-[clamp(0.5rem,0.95vw,0.8rem)]">
+          <div class="grid grid-cols-1 items-center gap-1 sm:grid-cols-[minmax(0,7.5em)_1fr] sm:gap-[clamp(0.6rem,1.1vw,1rem)]">
+            <label class="text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold" for="cf-name">Name</label>
+            <input type="text" id="cf-name" class="w-full bg-white px-[0.6em] py-[0.3em] font-sans text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-relaxed text-pvo-text outline-none transition duration-300 focus:shadow-[0_0_0_2px_rgba(255,255,255,0.55)]" required>
+          </div>
+          <div class="grid grid-cols-1 items-center gap-1 sm:grid-cols-[minmax(0,7.5em)_1fr] sm:gap-[clamp(0.6rem,1.1vw,1rem)]">
+            <label class="text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold" for="cf-phone">Phone No</label>
+            <input type="tel" id="cf-phone" class="w-full bg-white px-[0.6em] py-[0.3em] font-sans text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-relaxed text-pvo-text outline-none transition duration-300 focus:shadow-[0_0_0_2px_rgba(255,255,255,0.55)]" required>
+          </div>
+          <div class="grid grid-cols-1 items-center gap-1 sm:grid-cols-[minmax(0,7.5em)_1fr] sm:gap-[clamp(0.6rem,1.1vw,1rem)]">
+            <label class="text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold" for="cf-email">Email ID</label>
+            <input type="email" id="cf-email" class="w-full bg-white px-[0.6em] py-[0.3em] font-sans text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-relaxed text-pvo-text outline-none transition duration-300 focus:shadow-[0_0_0_2px_rgba(255,255,255,0.55)]" required>
+          </div>
+          <div class="grid grid-cols-1 items-center gap-1 sm:grid-cols-[minmax(0,7.5em)_1fr] sm:gap-[clamp(0.6rem,1.1vw,1rem)]">
+            <label class="text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold" for="cf-message">Message</label>
+            <textarea id="cf-message" class="min-h-[clamp(56px,5.5vw,88px)] w-full resize-y bg-white px-[0.6em] py-[0.3em] font-sans text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] leading-relaxed text-pvo-text outline-none transition duration-300 focus:shadow-[0_0_0_2px_rgba(255,255,255,0.55)]" rows="4" required></textarea>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,7.5em)_1fr] sm:gap-[clamp(0.6rem,1.1vw,1rem)]">
+            <span class="hidden sm:block" aria-hidden="true"></span>
+            <button type="submit" class="inline-flex w-full items-center justify-center rounded-[5px] bg-pvo-red-bright px-4 py-[0.45em] text-[clamp(0.78rem,0.75rem+0.11vw,0.82rem)] font-bold uppercase tracking-[0.06em] text-white transition duration-300 hover:bg-pvo-red-dark">SUBMIT</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="mx-auto w-[min(95vw,1500px)] px-[clamp(1rem,2vw,2rem)] pb-[clamp(1rem,2vw,1.75rem)] max-[479px]:px-[0.9rem] 3xl:w-[min(88vw,1500px)]">
+      <p class="max-w-none border-t border-white/65 pt-[clamp(0.5rem,1vw,0.85rem)] text-[clamp(0.7rem,0.675rem+0.09vw,0.72rem)] font-bold md:max-w-[30em]">&copy;Copyright 2026 People Verdict Organization All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
