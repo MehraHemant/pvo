@@ -1,0 +1,242 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   The PSD unit.
+
+   1 --u == 1 pixel of the 1920px PVO Website.psd artboard. It is 1/1920th of
+   the viewport width, so the whole design scales proportionally below 1920 and
+   caps at 1px above it, where .psd-stage-inner centres the 1920 box instead of
+   left-aligning it. Every PSD length in this file and in Psd.jsx is written as
+   calc(<psd px> * var(--u)).
+   --------------------------------------------------------------------------- */
+:root {
+  /* calc(100vw / 1920) rather than the rounded 0.0520833vw: same value, but
+     exact, so a box at x=1718 lands on 1718 and not 1717.97. */
+  --u: min(calc(100vw / 1920), 1px);
+}
+
+/* ---------------------------------------------------------------------------
+   PSD absolute layout — desktop only.
+
+   Base styles are the mobile reflow: nothing here positions anything below
+   1200px, so a single markup tree serves both renders. See Psd.jsx for the
+   PsdStage / PsdBox / PsdText components that emit these custom properties.
+   --------------------------------------------------------------------------- */
+.psd-stage-inner {
+  display: contents;
+}
+
+@media (min-width: 1200px) {
+  .psd-stage {
+    position: relative;
+    width: 100%;
+    height: calc(var(--h) * var(--u));
+  }
+  .psd-stage-inner {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: calc(-960 * var(--u));
+    width: calc(1920 * var(--u));
+    height: 100%;
+  }
+  .psd {
+    position: absolute;
+    left: calc(var(--x) * var(--u));
+    top: calc(var(--y) * var(--u));
+  }
+  .psd-w {
+    width: calc(var(--w) * var(--u));
+  }
+  .psd-h {
+    height: calc(var(--h) * var(--u));
+  }
+}
+
+@layer utilities {
+  /* Scroll-snap carousels: keep the scrolling, drop the scrollbar. A classic
+     scrollbar would eat into the PSD-exact box the scroller is pinned to. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Type scale calibrated against the PSD composite: the PSD's type layers are
+     scaled in Photoshop, so these are the rendered sizes, not the engine sizes.
+     Each is the CSS px at a 1920 viewport, floored so it does not collapse on
+     small screens. */
+  .text-tiny {
+    /* Journey card body */
+    font-size: max(0.7rem, calc(22.93 * var(--u)));
+    line-height: 1.28;
+    font-weight: 300;
+  }
+  .text-caption {
+    /* Intro captions */
+    font-size: max(0.75rem, calc(33.3 * var(--u)));
+    line-height: 1.28;
+    font-weight: 300;
+  }
+  .text-menu {
+    /* Nav links */
+    font-size: max(0.8rem, calc(25 * var(--u)));
+    line-height: 1.2;
+    letter-spacing: 0;
+    font-weight: 500;
+  }
+  .text-copy {
+    font-size: max(0.95rem, calc(31 * var(--u)));
+    line-height: calc(45.83 / 31);
+    font-weight: 400;
+  }
+  .text-kicker {
+    /* Journey card title */
+    font-size: max(0.8rem, calc(30.57 * var(--u)));
+    line-height: 1.15;
+    letter-spacing: 0;
+    font-weight: 500;
+  }
+  .text-lead {
+    /* Intro labels */
+    font-size: max(0.9rem, calc(37.5 * var(--u)));
+    line-height: 1.25;
+    font-weight: 600;
+  }
+  .text-figure {
+    /* Journey year pill */
+    font-size: max(1rem, calc(45.85 * var(--u)));
+    line-height: 1.1;
+    font-weight: 600;
+  }
+  .text-badge {
+    /* IEC CAMPAIGN badge */
+    font-size: max(1rem, calc(50 * var(--u)));
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    font-weight: 900;
+  }
+  .text-title {
+    /* Section headings */
+    font-size: max(1.75rem, calc(83.33 * var(--u)));
+    line-height: 1.16;
+    letter-spacing: 0.01em;
+    font-weight: 900;
+  }
+  .text-hero {
+    font-size: max(1.75rem, calc(50 * var(--u)));
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    font-weight: 900;
+  }
+  .text-team {
+    font-size: max(2.1rem, calc(83.33 * var(--u)));
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    font-weight: 900;
+  }
+  .text-statnum {
+    /* 2010 / 15+ / 3000+ */
+    font-size: max(1.75rem, calc(83.33 * var(--u)));
+    line-height: 1.16;
+    letter-spacing: 0.01em;
+    font-weight: 900;
+  }
+  .text-empanel {
+    font-size: max(1.25rem, calc(45.83 * var(--u)));
+    line-height: 1.1;
+    font-weight: 700;
+  }
+  .text-emsub {
+    font-size: max(1rem, calc(37.5 * var(--u)));
+    line-height: calc(45.83 / 37.5);
+    font-weight: 300;
+  }
+  .text-case {
+    /* Case study titles */
+    font-size: max(0.85rem, calc(29.17 * var(--u)));
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    font-weight: 900;
+  }
+  .text-casebody {
+    font-size: max(0.9rem, calc(25 * var(--u)));
+    line-height: 1.457;
+    font-weight: 300;
+  }
+  .text-mvv {
+    font-size: max(0.85rem, calc(25 * var(--u)));
+    line-height: 1.2;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+  .text-mvvtitle {
+    font-size: max(1.15rem, calc(36 * var(--u)));
+    line-height: 1.1;
+    letter-spacing: 0;
+    font-weight: 900;
+  }
+  .text-brandname {
+    font-size: max(1rem, calc(39.75 * var(--u)));
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    font-weight: 900;
+  }
+  .text-brandbody {
+    font-size: max(0.9rem, calc(26.5 * var(--u)));
+    line-height: 1.375;
+    font-weight: 300;
+  }
+  .text-brandurl {
+    font-size: max(0.9rem, calc(26.5 * var(--u)));
+    line-height: 1.2;
+    font-weight: 600;
+  }
+  .text-foothead {
+    font-size: max(0.95rem, calc(30 * var(--u)));
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  .text-footlink {
+    font-size: max(0.8rem, calc(22 * var(--u)));
+    line-height: calc(36 / 22);
+    font-weight: 400;
+  }
+  .text-footphone {
+    font-size: max(0.9rem, calc(27.91 * var(--u)));
+    line-height: 1.2;
+    font-weight: 600;
+  }
+  .text-footmail {
+    font-size: max(0.8rem, calc(22 * var(--u)));
+    line-height: 1.2;
+    font-style: italic;
+    font-weight: 500;
+  }
+  .text-footaddr {
+    font-size: max(0.8rem, calc(22 * var(--u)));
+    line-height: 1.45;
+    font-weight: 600;
+  }
+  .text-footlabel {
+    font-size: max(0.85rem, calc(26.25 * var(--u)));
+    line-height: 1.2;
+    font-weight: 600;
+  }
+  .text-footsubmit {
+    font-size: max(0.8rem, calc(19.49 * var(--u)));
+    line-height: 1;
+    letter-spacing: normal;
+    font-weight: 700;
+  }
+  .text-footcopy {
+    font-size: max(0.75rem, calc(22 * var(--u)));
+    line-height: 1.2;
+    font-weight: 600;
+  }
+}
