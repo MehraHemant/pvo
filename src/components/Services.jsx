@@ -1,38 +1,115 @@
+import { useEffect, useRef, useState } from 'react'
+import { Autoplay } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
 import CarouselArrow from './CarouselArrow.jsx'
-import CarouselDots from './CarouselDots.jsx'
 import Container from './Container'
 import { psdLen, PsdBox, PsdStage, PsdText } from './Psd.jsx'
-import { useEmblaSection } from './useEmblaSection.js'
 
-// The visible strip is the PSD's photo row, 85..1835 x 348..867: three frames
-// with a 31px gutter, which is exactly 1750 wide. The track runs on past it.
-const ROW = { x: 85, y: 348, w: 1750, h: 519 }
+const AUTOPLAY_MS = 3000
 
-const PHOTOS = [
+/** Each slide: campaign heading + row of three photos (desktop shows all three). */
+const GROUPS = [
   {
-    src: '/iec-1.jpg',
-    alt: 'IEC Campaign — branded LED vans for a Bihar agriculture outreach drive',
-    w: 563
+    title: 'IEC CAMPAIGN',
+    images: [
+      {
+        src: '/iec-1.jpg',
+        alt: 'IEC Campaign — branded LED vans for a Bihar agriculture outreach drive'
+      },
+      {
+        src: '/iec-2.jpg',
+        alt: 'IEC Campaign — open-ground public gathering at Kamal Mela'
+      },
+      {
+        src: '/iec-3.jpg',
+        alt: 'IEC Campaign — rural audience at a Shravani Mela LED van activation'
+      }
+    ]
   },
   {
-    src: '/iec-2.jpg',
-    alt: 'IEC Campaign — open-ground public gathering at Kamal Mela',
-    w: 562
+    title: 'LED VAN ACTIVATION',
+    images: [
+      {
+        src: '/PVO-Website-Banner-1.jpg',
+        alt: 'Jagannath Ji Yatra — roadside LED branding along the yatra route'
+      },
+      {
+        src: '/PVO-Website-Banner-2.jpg',
+        alt: 'Bapu 150 Celebration — when an event venue became a story'
+      },
+      {
+        src: '/PVO-Website-Banner-5.jpg',
+        alt: 'Open-ground public gathering at a Kamal Mela activation'
+      }
+    ]
   },
   {
-    src: '/iec-3.jpg',
-    alt: 'IEC Campaign — rural audience at a Shravani Mela LED van activation',
-    w: 563
+    title: 'CULTURAL EVENTS',
+    images: [
+      {
+        src: '/case-bapu.jpg',
+        alt: 'Bapu Jayanti — Gandhi Vichar Samagam stage event'
+      },
+      {
+        src: '/case-jagannath.jpg',
+        alt: 'Jagannath Ji Yatra — community branding along the yatra route'
+      },
+      {
+        src: '/case-shravani.jpg',
+        alt: 'Bihar Shravani Mela — Kanwar route outreach and crowd handling'
+      }
+    ]
   }
 ]
 
-// Mobile: over the strip's edges. Desktop: out in the artboard margin beside
-// the row, which is empty in the PSD, vertically centred on the frames.
+const GAP = 'clamp(0.75rem,1.6vw,31px)'
+
 const ARROW =
-  'absolute top-1/2 z-10 h-10 w-10 -translate-y-1/2 xl:top-[calc(584*var(--u))] xl:h-[calc(48*var(--u))] xl:w-[calc(48*var(--u))] xl:translate-y-0'
+  'absolute top-1/2 z-10 h-10 w-10 -translate-y-1/2 xl:top-[calc(550*var(--u))] xl:h-[calc(48*var(--u))] xl:w-[calc(48*var(--u))] xl:translate-y-0'
+
+function CampaignBadge({ title }) {
+  return (
+    <div
+      className="mx-auto mb-5 flex h-[clamp(2.5rem,4.11vw,79px)] w-fit min-w-[clamp(12rem,23.85vw,458px)] items-center justify-center bg-pvo-amber-mid px-8 md:mb-7"
+      style={{ borderRadius: 'calc(8 * var(--u))' }}
+    >
+      <span className="text-badge uppercase text-[#2E3C4E]">{title}</span>
+    </div>
+  )
+}
+
+function PhotoRow({ images }) {
+  return (
+    <div
+      className="grid grid-cols-1 gap-[var(--services-gap)] md:grid-cols-3"
+      style={{ ['--services-gap']: GAP }}
+    >
+      {images.map((photo) => (
+        <figure
+          key={photo.src}
+          className="min-w-0 overflow-hidden border-2 border-black max-xl:aspect-[563/519]"
+          style={{ borderRadius: 'calc(22 * var(--u))' }}
+        >
+          <img src={photo.src} alt={photo.alt} className="block h-full w-full object-cover xl:h-[calc(519*var(--u))]" />
+        </figure>
+      ))}
+    </div>
+  )
+}
 
 export default function Services() {
-  const { emblaRef, index, canScroll, goTo, step, onKeyDown } = useEmblaSection()
+  const swiperRef = useRef(null)
+  const [reduceMotion, setReduceMotion] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const onChange = () => setReduceMotion(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
 
   return (
     <PsdStage
@@ -71,77 +148,67 @@ export default function Services() {
         >
           We offer a comprehensive suite of services designed to meet every outreach requirement
         </PsdText>
-        <PsdBox
-          x={729}
-          y={233}
-          w={458}
-          h={79}
-          className="mx-auto mb-5 flex h-[clamp(2.5rem,4.11vw,79px)] w-fit min-w-[clamp(12rem,23.85vw,458px)] items-center justify-center bg-pvo-amber-mid px-8 md:mb-7"
-          style={{ borderRadius: 'calc(8 * var(--u))' }}
-        >
-          <span className="text-badge uppercase text-[#2E3C4E]">IEC CAMPAIGN</span>
-        </PsdBox>
 
-        {/* Vanishes at xl so the scroller inside positions against the stage. */}
         <div className="relative xl:contents">
           <PsdBox
-            ref={emblaRef}
             data-carousel-scroller
-            tabIndex={canScroll ? 0 : -1}
-            role="group"
-            aria-roledescription="carousel"
-            aria-label="IEC campaign photos, use the left and right arrow keys"
-            onKeyDown={onKeyDown}
-            x={ROW.x}
-            y={ROW.y}
-            w={ROW.w}
-            h={ROW.h}
-            className="overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2E3C4E]"
+            x={85}
+            y={233}
+            w={1750}
+            h={634}
+            className="w-full max-w-full overflow-hidden"
           >
-            <div className="flex h-full gap-[clamp(0.75rem,1.6vw,31px)] xl:gap-[calc(31*var(--u))]">
-              {PHOTOS.map((photo, i) => (
-                <PsdBox
-                  as="figure"
-                  key={photo.src}
-                  data-carousel-slide
-                  w={photo.w}
-                  h={ROW.h}
-                  role="group"
-                  aria-roledescription="slide"
-                  aria-label={`Photo ${i + 1} of ${PHOTOS.length}`}
-                  className="min-w-0 shrink-0 grow-0 overflow-hidden border-2 border-black max-xl:w-[min(86%,38rem)]"
-                  style={{ borderRadius: 'calc(22 * var(--u))' }}
-                >
-                  <img
-                    src={photo.src}
-                    alt={photo.alt}
-                    className="block h-full w-full object-cover max-xl:aspect-[563/519]"
-                  />
-                </PsdBox>
+            <Swiper
+              modules={[Autoplay]}
+              loop
+              slidesPerView={1}
+              slidesPerGroup={1}
+              spaceBetween={24}
+              loopAdditionalSlides={1}
+              watchSlidesProgress
+              observer
+              observeParents
+              autoplay={
+                reduceMotion
+                  ? false
+                  : {
+                      delay: AUTOPLAY_MS,
+                      disableOnInteraction: false,
+                      pauseOnMouseEnter: true
+                    }
+              }
+              onSwiper={(instance) => {
+                swiperRef.current = instance
+                instance.loopFix()
+              }}
+              className="services-swiper w-full overflow-hidden"
+            >
+              {GROUPS.map((group, i) => (
+                <SwiperSlide key={group.title} className="!h-auto">
+                  <div
+                    role="group"
+                    aria-roledescription="slide"
+                    aria-label={`${group.title} (${i + 1} of ${GROUPS.length})`}
+                    className="flex flex-col"
+                  >
+                    <CampaignBadge title={group.title} />
+                    <PhotoRow images={group.images} />
+                  </div>
+                </SwiperSlide>
               ))}
-            </div>
+            </Swiper>
           </PsdBox>
 
           <CarouselArrow
             back
-            label="Previous IEC campaign photo"
-            onClick={() => step(-1)}
-            className={`${ARROW} -left-3 xl:left-[calc(18*var(--u))] ${canScroll ? '' : 'hidden'}`}
+            label="Previous service campaign"
+            onClick={() => swiperRef.current?.slidePrev()}
+            className={`${ARROW} left-3 xl:left-[calc(32*var(--u))]`}
           />
           <CarouselArrow
-            label="Next IEC campaign photo"
-            onClick={() => step(1)}
-            className={`${ARROW} -right-3 xl:right-[calc(18*var(--u))] ${canScroll ? '' : 'hidden'}`}
-          />
-        </div>
-
-        <div className="xl:absolute xl:left-1/2 xl:top-[calc(886*var(--u))] xl:z-10 xl:-translate-x-1/2 xl:mt-0">
-          <CarouselDots
-            count={PHOTOS.length}
-            index={index}
-            onSelect={goTo}
-            groupLabel="Choose an IEC campaign photo"
-            itemLabel={(i) => `Show IEC campaign photo ${i + 1}`}
+            label="Next service campaign"
+            onClick={() => swiperRef.current?.slideNext()}
+            className={`${ARROW} right-3 xl:right-[calc(32*var(--u))]`}
           />
         </div>
       </Container>

@@ -67,6 +67,46 @@
     display: none;
   }
 
+  /* Legacy native scroll-snap tracks: allow horizontal pan on touch devices. */
+  [data-carousel-scroller].overflow-x-auto {
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Carousel affordance: draggable track vs clickable controls. */
+  [data-carousel-scroller] {
+    cursor: grab;
+  }
+  [data-carousel-scroller][data-carousel-dragging],
+  [data-carousel-scroller]:active {
+    cursor: grabbing;
+  }
+  [data-carousel-scroller] img {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+  [data-carousel-prev],
+  [data-carousel-next],
+  [data-carousel-dot] {
+    cursor: pointer;
+  }
+
+  /*
+   Journey timeline: card box-shadows extend past slide bounds. Swiper and the
+   scroller use overflow:hidden for horizontal clipping, which also clips Y.
+   Pad the viewport and pull it back with negative margin so shadows paint inside
+   the padded band without changing layout height.
+   */
+  .journey-swiper {
+    overflow: hidden;
+  }
+  .journey-swiper .swiper {
+    --journey-shadow-band: max(1rem, calc(30 * var(--u)));
+    padding-block: var(--journey-shadow-band);
+    margin-block: calc(-1 * var(--journey-shadow-band));
+    overflow: hidden;
+  }
+
   /* Type scale calibrated against the PSD composite: the PSD's type layers are
      scaled in Photoshop, so these are the rendered sizes, not the engine sizes.
      Each is the CSS px at a 1920 viewport, floored so it does not collapse on

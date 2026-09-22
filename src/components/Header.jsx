@@ -39,18 +39,18 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 flex h-[clamp(4.5rem,8.96vw,172px)] w-full items-center justify-between gap-4 bg-white pl-[clamp(1rem,22.14vw,425px)] pr-[clamp(1rem,17.76vw,341px)] shadow-pvo-xs xl:block xl:px-0">
+    <header className="sticky top-0 z-50 flex h-[clamp(3.5rem,6.77vw,130px)] w-full items-center justify-between gap-4 bg-white pl-[clamp(1rem,22.14vw,425px)] pr-[clamp(1rem,17.76vw,341px)] shadow-pvo-xs xl:block xl:px-0">
       {/* Same centring as .psd-stage-inner in styles.css. The header stays
           sticky, so it is not wrapped in PsdStage. */}
       <div className="psd-stage-inner">
-        <PsdBox as="a" href="#home" x={425} y={18} w={170} h={129} className="shrink-0">
+        <PsdBox as="a" href="#home" x={425} y={14} w={128} h={98} className="shrink-0">
           <img
             src="/PVO-Logo-.png"
             alt="PVO - People Verdict Organization"
-            className="block h-[clamp(2.75rem,6.72vw,129px)] w-auto xl:h-full xl:w-full xl:object-contain xl:object-left"
+            className="block h-[clamp(2.1rem,5.1vw,98px)] w-auto xl:h-full xl:w-full xl:object-contain xl:object-left"
           />
         </PsdBox>
-        <PsdBox as="nav" x={843} y={74} w={736} h={19} className="relative">
+        <PsdBox as="nav" x={843} y={56} w={736} h={19} className="relative">
           <ul
             className={`${open ? 'flex' : 'hidden'} absolute right-0 top-full z-20 mt-2 min-w-48 flex-col items-start gap-2.5 rounded-photo bg-white px-4 py-4 shadow-pvo-md lg:static lg:mt-0 lg:flex lg:min-w-0 lg:flex-row lg:items-center lg:gap-[clamp(1.25rem,2.2vw,42px)] lg:bg-transparent lg:p-0 lg:shadow-none xl:h-full xl:w-full xl:justify-between xl:gap-0 xl:leading-[19px]`}
           >

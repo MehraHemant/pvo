@@ -24,7 +24,7 @@ export default function CarouselDots({
           aria-label={itemLabel(i)}
           aria-current={i === index ? 'true' : undefined}
           onClick={() => onSelect(i)}
-          className={`flex h-11 w-11 items-center justify-center rounded-full border-0 bg-transparent p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E3C4E] xl:h-auto xl:w-auto xl:min-h-0 xl:min-w-0`}
+          className={`flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border-0 bg-transparent p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E3C4E] xl:h-auto xl:w-auto xl:min-h-0 xl:min-w-0`}
         >
           <span
             aria-hidden="true"

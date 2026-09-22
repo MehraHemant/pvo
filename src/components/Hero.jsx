@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
-import CarouselArrow from './CarouselArrow.jsx'
-import { useCarousel } from './useCarousel.js'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { Autoplay } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import CarouselDots from './CarouselDots.jsx'
 
 // All five banners are 1920x750, the PSD hero height. The width/height
 // attributes reserve that ratio before the JPEGs decode, so the section is
@@ -35,27 +37,36 @@ const BANNERS = [
 
 const AUTOPLAY_MS = 5000
 
-// The banners are finished artwork with their own headline on the left, so the
-// controls sit together in one cluster along the bottom rather than over it.
-const ARROW = 'h-[clamp(1.5rem,1.98vw,38px)] w-[clamp(1.5rem,1.98vw,38px)]'
-
 export default function Hero() {
-  const { scrollerRef, index, goTo, step, onKeyDown } = useCarousel(BANNERS.length)
-  // Autoplay holds while the pointer or focus is inside, and stops for good
-  // once the visitor has driven the carousel themselves.
-  const [held, setHeld] = useState(false)
-  const [driven, setDriven] = useState(false)
+  const swiperRef = useRef(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [reduceMotion, setReduceMotion] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
 
   useEffect(() => {
-    if (held || driven) return undefined
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const onChange = () => setReduceMotion(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
 
-    const id = window.setInterval(() => {
-      if (document.visibilityState === 'visible') goTo((index + 1) % BANNERS.length)
-    }, AUTOPLAY_MS)
-
-    return () => window.clearInterval(id)
-  }, [driven, goTo, held, index])
+  const onKeyDown = useCallback((event) => {
+    const delta = { ArrowRight: 1, ArrowLeft: -1 }[event.key]
+    if (delta) {
+      event.preventDefault()
+      if (delta < 0) swiperRef.current?.slidePrev()
+      else swiperRef.current?.slideNext()
+      return
+    }
+    if (event.key === 'Home') {
+      event.preventDefault()
+      swiperRef.current?.slideToLoop(0)
+    } else if (event.key === 'End') {
+      event.preventDefault()
+      swiperRef.current?.slideToLoop(BANNERS.length - 1)
+    }
+  }, [])
 
   return (
     <section
@@ -63,64 +74,74 @@ export default function Hero() {
       id="home"
       aria-roledescription="carousel"
       aria-label="People Verdict campaign highlights"
-      onMouseEnter={() => setHeld(true)}
-      onMouseLeave={() => setHeld(false)}
-      onFocus={() => setHeld(true)}
-      onBlur={() => setHeld(false)}
-      onPointerDown={() => setDriven(true)}
-      onKeyDown={() => setDriven(true)}
     >
       <div
-        ref={scrollerRef}
         data-carousel-scroller
         tabIndex={0}
         role="group"
         aria-label="Campaign banners, use the left and right arrow keys"
         onKeyDown={onKeyDown}
-        className="no-scrollbar flex w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#2E3C4E]"
+        className="overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#2E3C4E]"
       >
-        {BANNERS.map((banner, i) => (
-          <div
-            key={banner.src}
-            data-carousel-slide
-            role="group"
-            aria-roledescription="slide"
-            aria-label={`${banner.title} (${i + 1} of ${BANNERS.length})`}
-            className="w-full shrink-0 snap-start"
-          >
-            <img
-              src={banner.src}
-              alt={banner.alt}
-              width={1920}
-              height={750}
-              loading={i === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-              className="mx-auto block h-auto w-full"
-            />
-          </div>
-        ))}
+        <Swiper
+          modules={[Autoplay]}
+          loop
+          slidesPerView={1}
+          slidesPerGroup={1}
+          spaceBetween={0}
+          loopAdditionalSlides={4}
+          watchSlidesProgress
+          observer
+          observeParents
+          autoplay={
+            reduceMotion
+              ? false
+              : {
+                  delay: AUTOPLAY_MS,
+                  disableOnInteraction: false,
+                  pauseOnMouseEnter: true
+                }
+          }
+          onSwiper={(instance) => {
+            swiperRef.current = instance
+            setActiveIndex(instance.realIndex)
+            instance.loopFix()
+          }}
+          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+          className="hero-swiper w-full overflow-hidden"
+        >
+          {BANNERS.map((banner, i) => (
+            <SwiperSlide key={banner.src}>
+              <div
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`${banner.title} (${i + 1} of ${BANNERS.length})`}
+              >
+                <img
+                  src={banner.src}
+                  alt={banner.alt}
+                  width={1920}
+                  height={750}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  className="mx-auto block h-auto w-full"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
 
-      <div className="absolute bottom-[clamp(0.5rem,1.15vw,22px)] left-1/2 z-10 flex -translate-x-1/2 items-center gap-[clamp(0.5rem,0.83vw,16px)]">
-        <CarouselArrow back label="Previous banner" onClick={() => step(-1)} className={ARROW} />
-
-        <div className="flex gap-[clamp(5px,0.42vw,8px)]" role="group" aria-label="Choose a banner">
-          {BANNERS.map((banner, i) => (
-            <button
-              key={banner.src}
-              type="button"
-              data-carousel-dot
-              aria-label={`Show ${banner.title}`}
-              aria-current={i === index ? 'true' : undefined}
-              onClick={() => goTo(i)}
-              className={`h-[clamp(9px,0.78vw,15px)] w-[clamp(9px,0.78vw,15px)] rounded-full border-2 border-[#2E3C4E] p-0 shadow-pvo-xs transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E3C4E] ${
-                i === index ? 'bg-[#2E3C4E]' : 'bg-white/80 hover:bg-white'
-              }`}
-            />
-          ))}
+      <div className="pointer-events-none absolute bottom-[clamp(0.5rem,1.15vw,22px)] left-1/2 z-10 -translate-x-1/2 [&>div]:mt-0 [&>div]:gap-[clamp(5px,0.42vw,8px)]">
+        <div className="pointer-events-auto">
+          <CarouselDots
+            count={BANNERS.length}
+            index={activeIndex}
+            onSelect={(i) => swiperRef.current?.slideToLoop(i)}
+            groupLabel="Choose a banner"
+            itemLabel={(i) => `Show ${BANNERS[i].title}`}
+          />
         </div>
-
-        <CarouselArrow label="Next banner" onClick={() => step(1)} className={ARROW} />
       </div>
     </section>
   )
