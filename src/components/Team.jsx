@@ -92,8 +92,8 @@ const PAGE_COUNT = Math.ceil(TEAM_MEMBERS.length / MEMBERS_PER_PAGE)
 
 function TeamMemberCard({ member }) {
   return (
-    <article className="flex min-w-0 flex-col gap-3 p-2 shadow-sm sm:h-50 sm:flex-row sm:gap-3">
-      <div className="relative mx-auto h-40 w-full max-w-[10rem] shrink-0 overflow-hidden rounded-md sm:mx-0 sm:h-full sm:min-h-0 sm:max-w-none sm:w-28 sm:max-h-none md:w-32 xl:rounded-photo">
+    <article className="flex min-w-0 flex-col gap-3 p-2 shadow-sm bg-white rounded-lg sm:h-44 sm:flex-row sm:gap-3">
+      <div className="relative mx-auto h-full w-full max-w-[10rem] shrink-0 overflow-hidden rounded-md sm:mx-0 sm:w-28 sm:max-h-none md:w-32 xl:rounded-photo">
         <img
           src={member.image}
           alt={`${member.name}, ${member.role}`}
@@ -107,7 +107,7 @@ function TeamMemberCard({ member }) {
         <span className="role-underline relative mt-0.5 block shrink-0 pb-1 text-xs font-medium leading-snug text-pvo-blue after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-5 after:bg-pvo-blue sm:after:w-6 md:after:w-7">
           {member.role}
         </span>
-        <p className="mt-1 text-xs leading-snug text-pvo-text-light sm:text-sm">
+        <p className="mt-1 text-xs md:text-[13px] leading-snug text-pvo-text-light">
           {member.bio}
         </p>
       </div>
@@ -166,7 +166,7 @@ export default function Team() {
       ></span>
 
       <Container className="team-layout">
-        <div className="flex flex-col items-start pt-2 md:pt-3 xl:pt-5">
+        <div className="flex flex-col items-start py-20">
           <span className="mb-2 block text-sm font-medium uppercase leading-tight tracking-wide text-pvo-blue sm:text-base">
             PEOPLE. PURPOSE. PERFORMANCE
           </span>
@@ -213,10 +213,10 @@ export default function Team() {
           </div>
         </div>
 
-        <div className="flex h-full min-h-0 min-w-0 flex-col">
+        <div className="flex h-full min-h-0 min-w-0 flex-col py-20">
           <article className="relative mb-3 flex shrink-0 flex-col gap-3 overflow-hidden rounded-photo bg-pvo-navy-deep p-2.5 shadow-pvo-sm sm:flex-row md:mb-4 md:gap-4 md:rounded-card-md md:p-3 xl:mb-5 xl:rounded-card xl:gap-4 xl:p-4">
             <span
-              className="pointer-events-none absolute -right-6 -top-6 size-20 rounded-full border-2 border-pvo-blue md:-right-8 md:-top-8 md:size-24 md:border-logo xl:-right-11 xl:-top-11 xl:size-30 xl:border-12"
+              className="pointer-events-none absolute -right-6 -top-6 size-20 rounded-full border-pvo-blue md:-right-8 md:-top-10 md:size-24 border-[20px] xl:-right-11 xl:-top-11 xl:size-30"
               aria-hidden="true"
             ></span>
             <div className="w-full shrink-0 self-stretch overflow-hidden rounded-md sm:w-28 md:w-36 xl:w-44 xl:rounded-photo">
@@ -236,7 +236,7 @@ export default function Team() {
               <span className="mt-0.5 block text-sm font-medium leading-snug tracking-wide text-pvo-ceo-accent sm:text-base">
                 Engineer. MBA. Visionary Leader.
               </span>
-              <p className="mt-2 max-w-prose-lg text-xs font-medium leading-normal text-white sm:text-sm md:text-base">
+              <p className="mt-2 max-w-prose-lg text-xs leading-normal text-white sm:text-sm md:text-base">
                 By day, Ujjawal is a passionate marketing professional, steering our strategic acumen and a
                 relentless drive for success. With a sharp engineering mind and a robust business background,
                 he brings a unique blend of technical expertise and managerial prowess to the table.
