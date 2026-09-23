@@ -48,7 +48,7 @@ const TEAM_MEMBERS = [
     name: 'Aarti',
     role: 'Sr.Manager Tender & Government Project',
     image: '/Team Images/Anshu.jpg',
-    bio: 'Aarti manages tenders and government projects with precision and expertise. She ensures smooth execution, compliance, and timely delivery.'
+    bio: 'Aarti manages tenders, government projects with precision and expertise. She ensures execution, compliance, and timely delivery.'
   },
   {
     name: 'Ishwar',
@@ -104,10 +104,10 @@ function TeamMemberCard({ member }) {
         <h3 className="shrink-0 text-sm font-bold leading-tight text-pvo-navy sm:text-base">
           {member.name}
         </h3>
-        <span className="role-underline relative mt-0.5 block shrink-0 pb-1 text-xs font-medium leading-snug text-pvo-blue after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-5 after:bg-pvo-blue sm:after:w-6 md:after:w-7">
+        <span className="role-underline relative mt-0.5 block shrink-0 pb-1 text-xs md:text-sm font-medium leading-snug text-pvo-blue after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-5 after:bg-pvo-blue sm:after:w-6 md:after:w-7">
           {member.role}
         </span>
-        <p className="mt-1 text-xs md:text-[13px] leading-snug text-pvo-text-light">
+        <p className="mt-1 text-xs md:text-sm leading-snug text-pvo-text-light">
           {member.bio}
         </p>
       </div>
@@ -153,7 +153,7 @@ export default function Team() {
   return (
     <section
       id="team"
-      className="section-y relative w-full overflow-hidden bg-team-wash"
+      className="section-y relative w-full overflow-hidden bg-gradient-to-r from-white to-50% via-white to-gray-100"
       aria-labelledby="team-heading"
     >
       <span
@@ -172,9 +172,9 @@ export default function Team() {
           </span>
           <h2
             id="team-heading"
-            className="text-3xl font-black uppercase leading-none tracking-tight text-pvo-navy sm:text-4xl lg:text-5xl"
+            className="text-3xl font-black uppercase leading-none tracking-tight text-pvo-navy sm:text-4xl lg:text-6xl"
           >
-            TEAM &<br />MANAGEMENT
+            TEAM & MANAGEMENT
           </h2>
           <span className="mb-3 mt-3 block h-1 w-9 rounded-sm bg-pvo-blue md:mb-4 md:mt-4 md:w-11 xl:mb-5 xl:mt-4 xl:w-13" aria-hidden="true"></span>
           <p className="mb-4 max-w-none text-sm font-normal leading-loose text-pvo-text-light sm:text-base md:mb-6 lg:text-lg xl:mb-7 xl:max-w-prose-md">
@@ -183,7 +183,7 @@ export default function Team() {
           </p>
           <a
             href="#team"
-            className="inline-flex items-center gap-3 rounded-full bg-pvo-blue-dark py-2 pl-5 pr-2 text-base font-bold leading-snug text-white transition duration-300 hover:bg-pvo-hover-blue hover:shadow-pvo-md sm:text-lg"
+            className="inline-flex items-center gap-3 rounded-2xl bg-pvo-blue-dark py-2 pl-5 pr-2 text-base font-bold leading-snug text-white transition duration-300 hover:bg-pvo-hover-blue hover:shadow-pvo-md sm:text-lg"
           >
             Meet Our Team
             <span className="grid size-8 shrink-0 place-items-center rounded-full bg-pvo-navy text-white" aria-hidden="true">
