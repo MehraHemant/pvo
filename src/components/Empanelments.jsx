@@ -60,18 +60,26 @@ export default function Empanelments() {
           </ul>
         </div>
 
-        <div className="mx-auto grid w-full max-w-xs grid-cols-2 gap-0.5 md:max-w-md lg:ml-auto lg:mr-0 xl:max-w-empanel xl:gap-1.5">
-          <span className="grid aspect-square place-items-center rounded-full border-2 border-pvo-navy-mid bg-white p-3 shadow-pvo-md md:border-logo md:p-5 xl:border-13 xl:p-7">
+        <div className="mx-auto grid w-full max-w-sm grid-cols-2 gap-3 md:max-w-md lg:ml-auto lg:mr-0 xl:max-w-empanel xl:gap-3">
+          <span className="border-pvo-navy-mid bg-pvo-navy-mid border-12 rounded-tl-full rounded-tr-full rounded-bl-full">
+            <div className="bg-white w-full h-full rounded-full">
             <img src="/Empanelments/Logo1.png" alt="DAVP — Directorate of Advertising and Visual Publicity" className="max-h-full max-w-full object-contain" />
+            </div>
           </span>
-          <span className="grid aspect-square place-items-center rounded-full border-2 border-pvo-blue-soft bg-white p-3 shadow-pvo-md md:border-logo md:p-5 xl:border-13 xl:p-7">
+          <span className="border-pvo-blue-soft bg-pvo-blue-soft border-12 rounded-tl-full rounded-tr-full rounded-br-full">
+          <div className="bg-white w-full h-full rounded-full">
             <img src="/Empanelments/Logo2.png" alt="Government of Bihar" className="max-h-full max-w-full object-contain" />
+          </div>
           </span>
-          <span className="grid aspect-square place-items-center rounded-full border-2 border-pvo-blue-soft bg-white p-3 shadow-pvo-md md:border-logo md:p-5 xl:border-13 xl:p-7">
+          <span className="border-pvo-blue-soft bg-pvo-blue-soft border-12 rounded-tl-full rounded-bl-full rounded-br-full">
+          <div className="bg-white w-full h-full rounded-full">
             <img src="/Empanelments/Logo3.png" alt="Government of Goa" className="max-h-full max-w-full object-contain" />
+          </div>
           </span>
-          <span className="grid aspect-square place-items-center rounded-full border-2 border-pvo-navy-mid bg-white p-3 shadow-pvo-md md:border-logo md:p-5 xl:border-13 xl:p-7">
+          <span className="border-pvo-navy-mid bg-pvo-navy-mid border-12 rounded-br-full rounded-tr-full rounded-bl-full">
+          <div className="bg-white w-full h-full rounded-full">
             <img src="/Empanelments/Logo4.png" alt="Government of Assam" className="max-h-full max-w-full object-contain" />
+            </div>
           </span>
         </div>
       </Container>
