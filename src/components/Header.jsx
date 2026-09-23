@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { PsdBox, PsdText } from './Psd'
+import Container from './Container.jsx'
 
 const LINKS = [
   { href: '#home', id: 'home', label: 'HOME' },
@@ -15,76 +15,52 @@ export default function Header() {
   const [active, setActive] = useState('home')
 
   useEffect(() => {
+    const sections = LINKS.map((link) => document.getElementById(link.id)).filter(Boolean)
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id)
-          }
+          if (entry.isIntersecting) setActive(entry.target.id)
         })
       },
-      { rootMargin: '-35% 0px -55% 0px', threshold: 0 }
+      { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
     )
-
-    LINKS.forEach(({ id }) => {
-      const el = document.getElementById(id)
-      if (el) observer.observe(el)
-    })
-
+    sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
   }, [])
 
-  function handleLinkClick() {
-    setOpen(false)
-  }
-
   return (
-    <header className="sticky top-0 z-50 flex h-[clamp(3.5rem,6.77vw,130px)] w-full items-center justify-between gap-4 bg-white pl-[clamp(1rem,22.14vw,425px)] pr-[clamp(1rem,17.76vw,341px)] shadow-pvo-xs xl:block xl:px-0">
-      {/* Same centring as .psd-stage-inner in styles.css. The header stays
-          sticky, so it is not wrapped in PsdStage. */}
-      <div className="psd-stage-inner">
-        <PsdBox as="a" href="#home" x={425} y={14} w={128} h={98} className="shrink-0">
-          <img
-            src="/PVO-Logo-.png"
-            alt="PVO - People Verdict Organization"
-            className="block h-[clamp(2.1rem,5.1vw,98px)] w-auto xl:h-full xl:w-full xl:object-contain xl:object-left"
-          />
-        </PsdBox>
-        <PsdBox as="nav" x={843} y={56} w={736} h={19} className="relative">
-          <ul
-            className={`${open ? 'flex' : 'hidden'} absolute right-0 top-full z-20 mt-2 min-w-48 flex-col items-start gap-2.5 rounded-photo bg-white px-4 py-4 shadow-pvo-md lg:static lg:mt-0 lg:flex lg:min-w-0 lg:flex-row lg:items-center lg:gap-[clamp(1.25rem,2.2vw,42px)] lg:bg-transparent lg:p-0 lg:shadow-none xl:h-full xl:w-full xl:justify-between xl:gap-0 xl:leading-[19px]`}
-          >
+    <header className="sticky top-0 z-header w-full bg-white py-2 shadow-pvo-xs md:py-2.5 xl:py-3">
+      <Container className="flex min-w-0 items-center justify-between gap-3 md:gap-4">
+        <a href="#home" className="shrink-0" onClick={() => setOpen(false)}>
+          <img src="/PVO-Logo-.png" alt="PVO - People Verdict Organization" className="h-10 w-auto max-sm:h-8 md:h-14 xl:h-20" />
+        </a>
+        <nav aria-label="Primary" className="relative min-w-0 shrink">
+          <ul className={`${open ? 'flex' : 'hidden'} absolute right-0 top-full z-20 mt-2.5 min-w-48 max-w-[calc(100vw-2rem)] flex-col items-start gap-2.5 rounded-md bg-white px-4 py-4 shadow-pvo-md max-sm:left-0 max-sm:right-0 max-sm:min-w-0 lg:static lg:flex lg:max-w-none lg:flex-row lg:flex-wrap lg:items-center lg:justify-end lg:gap-2 lg:bg-transparent lg:p-0 lg:shadow-none xl:gap-5 2xl:gap-7 xl:rounded-photo`}>
             {LINKS.map((link) => (
-              <li key={link.id} className="xl:flex xl:h-full xl:items-center">
-                <PsdText
-                  as="a"
+              <li key={link.id}>
+                <a
                   href={link.href}
-                  size={25}
-                  weight={500}
-                  tracking={0}
-                  className={`relative inline-block whitespace-nowrap py-0.5 font-display text-menu uppercase transition-colors duration-300 hover:text-pvo-blue-dark xl:py-0 xl:!leading-[19px] max-xl:![font-size:max(0.8rem,calc(25*var(--u)))] ${
-                    active === link.id ? 'text-pvo-slate' : 'text-pvo-slate'
-                  }`}
-                  onClick={handleLinkClick}
+                  className={`nav-link relative py-1 text-sm font-medium uppercase leading-snug tracking-wide text-pvo-slate transition-colors duration-300 hover:text-pvo-blue-dark after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-0 after:bg-pvo-blue-dark after:transition-transform after:duration-300 xl:text-base xl:leading-tight 2xl:text-lg ${active === link.id ? 'text-pvo-blue-dark after:scale-x-100' : ''}`}
+                  onClick={() => setOpen(false)}
                 >
                   {link.label}
-                </PsdText>
+                </a>
               </li>
             ))}
           </ul>
           <button
             type="button"
-            className="flex cursor-pointer flex-col gap-1 border-0 bg-transparent p-1 lg:hidden"
-            aria-label="Toggle navigation"
+            className="flex flex-col gap-1 bg-transparent p-1.5 lg:hidden"
             aria-expanded={open}
-            onClick={() => setOpen((value) => !value)}
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={() => setOpen((prev) => !prev)}
           >
-            <span className="block h-0.5 w-6 bg-pvo-slate" />
-            <span className="block h-0.5 w-6 bg-pvo-slate" />
-            <span className="block h-0.5 w-6 bg-pvo-slate" />
+            <span className="block h-0.5 w-5 bg-pvo-slate" />
+            <span className="block h-0.5 w-5 bg-pvo-slate" />
+            <span className="block h-0.5 w-5 bg-pvo-slate" />
           </button>
-        </PsdBox>
-      </div>
+        </nav>
+      </Container>
     </header>
   )
 }

@@ -1,7 +1,7 @@
 import Chevron from './Chevron.jsx'
 
 const BASE =
-  'grid cursor-pointer place-items-center rounded-full border border-[#2E3C4E]/20 bg-white/90 text-[#2E3C4E] shadow-pvo-sm transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E3C4E]'
+  'grid cursor-pointer place-items-center rounded-full border border-pvo-carousel/20 bg-white/90 text-pvo-carousel shadow-pvo-sm transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pvo-carousel'
 
 /**
  * Carousel previous/next button. Size and placement come from `className`,

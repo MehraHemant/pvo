@@ -1,14 +1,13 @@
-export default function Container({ children, className = '', inset = 'page' }) {
-  const pad =
-    inset === 'tight'
-      ? 'px-[clamp(1.25rem,4.43vw,85px)]'
-      : inset === 'footer'
-        ? 'px-[clamp(1.25rem,11.875vw,228px)]'
-        : 'px-[8.33vw]'
+/**
+ * Shared horizontal bounds for header, main sections, and footer.
+ * Padding and max width match `.site-container` in styles.css.
+ */
+export default function Container({ as: Tag = 'div', className, children, ...rest }) {
+  const classes = ['site-container min-w-0', className].filter(Boolean).join(' ')
 
   return (
-    <div className={`mx-auto w-full ${pad} ${className}`.trim()}>
+    <Tag className={classes} {...rest}>
       {children}
-    </div>
+    </Tag>
   )
 }

@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /* Prevent flex/grid children from forcing horizontal scroll. */
+  #root,
+  main {
+    @apply min-w-0;
+  }
+}
+
 /* ---------------------------------------------------------------------------
    The PSD unit.
 
@@ -56,7 +64,162 @@
   }
 }
 
+@layer components {
+  /* Shared horizontal bounds for Header, main sections, and Footer (reflow).
+     PSD desktop layers use absolute coords inside PsdStage; below xl they sit in this gutter. */
+  .site-container {
+    @apply relative z-10 mx-auto box-border w-full min-w-0 max-w-full px-4 max-sm:px-3.5 md:px-6 xl:max-w-site xl:px-8;
+  }
+  @media (min-width: 1920px) {
+    .site-container {
+      max-width: min(88vw, 1500px);
+    }
+  }
+
+  /*
+   Footer reflow uses .site-container; at xl+ footer columns use PSD x≈243…1680
+   inside the centred 1920 artboard. Match that channel in the header bar.
+   */
+  @media (min-width: 1200px) {
+    header .site-container {
+      @apply max-w-none px-0;
+      width: calc(1920 * var(--u));
+      padding-inline: calc(243 * var(--u)) calc(240 * var(--u));
+    }
+  }
+
+  .section-y {
+    @apply py-10 md:py-14 xl:py-17;
+  }
+  @media (max-height: 500px) and (orientation: landscape) {
+    .section-y {
+      @apply py-6;
+    }
+  }
+
+  .mvv-section {
+    @apply bg-pvo-surface-alt bg-mvv-pattern bg-repeat;
+    background-size: 7.5rem auto;
+  }
+  @media (min-width: 768px) {
+    .mvv-section {
+      background-size: 9rem auto;
+    }
+  }
+  @media (min-width: 1200px) {
+    .mvv-section {
+      background-size: 10.9375rem auto;
+    }
+  }
+
+  .intro-section-y {
+    @apply pb-5 pt-10 md:pb-7 md:pt-14 xl:pb-8 xl:pt-17;
+  }
+  @media (max-height: 500px) and (orientation: landscape) {
+    .intro-section-y {
+      @apply py-6;
+    }
+  }
+
+  .prose-strong p + p {
+    @apply mt-3;
+  }
+  .prose-strong strong {
+    @apply font-bold text-pvo-text;
+  }
+  .prose-strong {
+    @apply min-w-0 break-words;
+  }
+
+  .role-underline::after {
+    content: '';
+  }
+
+  .nav-link::after {
+    content: '';
+  }
+
+  .team-layout {
+    @apply grid items-stretch gap-7 md:gap-8 xl:gap-10;
+  }
+  @media (min-width: 1200px) {
+    .team-layout {
+      grid-template-columns: 1fr 1.16fr;
+    }
+  }
+
+  .team-rotator {
+    @apply relative min-h-0 flex-1;
+  }
+
+  /* Room for carousel arrows on narrow viewports without horizontal overflow. */
+  .carousel-track {
+    @apply relative min-w-0 px-4 sm:px-8 md:px-12 xl:px-14;
+  }
+
+  .team-page-grid {
+    @apply absolute inset-0 grid grid-cols-1 items-stretch gap-6 transition-opacity ease-in-out md:grid-cols-2 md:grid-rows-2 md:gap-4;
+  }
+  @media (min-width: 768px) {
+    .team-page-grid {
+      grid-auto-rows: minmax(0, 8.5rem);
+    }
+  }
+  @media (min-width: 992px) {
+    .team-page-grid {
+      grid-auto-rows: minmax(0, 10rem);
+    }
+  }
+
+  .footer-cols {
+    @apply grid grid-cols-1 gap-8 pb-4 md:grid-cols-2 md:gap-10 md:pb-7;
+  }
+  @media (min-width: 992px) {
+    .footer-cols {
+      grid-template-columns: 1fr 0.55fr 1.15fr;
+    }
+  }
+
+  .form-label-row {
+    @apply grid grid-cols-1 items-center gap-1 sm:grid-cols-2 sm:gap-4;
+  }
+  @media (min-width: 576px) {
+    .form-label-row {
+      grid-template-columns: 7.5rem 1fr;
+    }
+  }
+
+  .services-feature-col {
+    @apply md:col-span-2 md:mx-auto md:w-full md:max-w-half lg:col-span-1 lg:max-w-none;
+  }
+
+  .object-cover-right {
+    object-position: 88% center;
+  }
+  .object-cover-focus {
+    object-position: 80% center;
+  }
+
+  .mvv-section {
+    @apply bg-pvo-surface-alt bg-mvv-pattern bg-repeat;
+    background-size: 7.5rem auto;
+  }
+  @media (min-width: 768px) {
+    .mvv-section {
+      background-size: 9rem auto;
+    }
+  }
+  @media (min-width: 1200px) {
+    .mvv-section {
+      background-size: 10.9375rem auto;
+    }
+  }
+}
+
 @layer utilities {
+  .max-w-half {
+    max-width: 50%;
+  }
   /* Scroll-snap carousels: keep the scrolling, drop the scrollbar. A classic
      scrollbar would eat into the PSD-exact box the scroller is pinned to. */
   .no-scrollbar {
@@ -71,6 +234,24 @@
   [data-carousel-scroller].overflow-x-auto {
     touch-action: pan-x;
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* Swiper carousels: vertical page scroll + horizontal drag on the track. */
+  .swiper-touch-carousel,
+  .hero-swiper,
+  .services-swiper,
+  .case-studies-swiper,
+  .journey-swiper .swiper {
+    touch-action: pan-y;
+  }
+  .swiper-touch-carousel img,
+  .journey-swiper img,
+  .hero-swiper img,
+  .services-swiper img,
+  .case-studies-swiper img {
+    -webkit-user-drag: none;
+    user-select: none;
+    pointer-events: none;
   }
 
   /* Carousel affordance: draggable track vs clickable controls. */
@@ -101,182 +282,135 @@
     overflow: hidden;
   }
   .journey-swiper .swiper {
-    --journey-shadow-band: max(1rem, calc(30 * var(--u)));
-    padding-block: var(--journey-shadow-band);
-    margin-block: calc(-1 * var(--journey-shadow-band));
+    padding-block: 1rem;
+    margin-block: -1rem;
     overflow: hidden;
   }
+  @media (min-width: 1280px) {
+    .journey-swiper .swiper {
+      padding-block: 1.875rem;
+      margin-block: -1.875rem;
+    }
+  }
 
-  /* Type scale calibrated against the PSD composite: the PSD's type layers are
-     scaled in Photoshop, so these are the rendered sizes, not the engine sizes.
-     Each is the CSS px at a 1920 viewport, floored so it does not collapse on
-     small screens. */
+  /* Legacy PSD token names — breakpoint type scale (no var(--u) on font-size). */
   .text-tiny {
-    /* Journey card body */
-    font-size: max(0.7rem, calc(22.93 * var(--u)));
-    line-height: 1.28;
-    font-weight: 300;
+    @apply text-xs font-light leading-snug md:text-sm;
   }
   .text-caption {
-    /* Intro captions */
-    font-size: max(0.75rem, calc(33.3 * var(--u)));
-    line-height: 1.28;
-    font-weight: 300;
+    @apply text-xs font-light leading-snug sm:text-sm;
   }
   .text-menu {
-    /* Nav links */
-    font-size: max(0.8rem, calc(25 * var(--u)));
-    line-height: 1.2;
-    letter-spacing: 0;
-    font-weight: 500;
+    @apply text-base font-medium leading-tight xl:text-lg;
   }
   .text-copy {
-    font-size: max(0.95rem, calc(31 * var(--u)));
-    line-height: calc(45.83 / 31);
-    font-weight: 400;
+    @apply text-base font-normal leading-normal md:text-lg;
   }
   .text-kicker {
-    /* Journey card title */
-    font-size: max(0.8rem, calc(30.57 * var(--u)));
-    line-height: 1.15;
-    letter-spacing: 0;
-    font-weight: 500;
+    @apply text-base font-medium leading-tight md:text-lg;
   }
   .text-lead {
-    /* Intro labels */
-    font-size: max(0.9rem, calc(37.5 * var(--u)));
-    line-height: 1.25;
-    font-weight: 600;
+    @apply text-lg font-semibold leading-snug md:text-xl;
   }
   .text-figure {
-    /* Journey year pill */
-    font-size: max(1rem, calc(45.85 * var(--u)));
-    line-height: 1.1;
-    font-weight: 600;
+    @apply text-xl font-semibold leading-tight md:text-2xl;
   }
   .text-badge {
-    /* IEC CAMPAIGN badge */
-    font-size: max(1rem, calc(50 * var(--u)));
-    line-height: 1.1;
-    letter-spacing: 0.01em;
-    font-weight: 900;
+    @apply text-lg font-black leading-tight tracking-tight;
   }
   .text-title {
-    /* Section headings */
-    font-size: max(1.75rem, calc(83.33 * var(--u)));
-    line-height: 1.16;
-    letter-spacing: 0.01em;
-    font-weight: 900;
+    @apply text-3xl font-black leading-tight tracking-tight md:text-4xl xl:text-5xl;
   }
   .text-hero {
-    font-size: max(1.75rem, calc(50 * var(--u)));
-    line-height: 1.05;
-    letter-spacing: 0.01em;
-    font-weight: 900;
+    @apply text-3xl font-black leading-none tracking-tight sm:text-4xl;
   }
   .text-team {
-    font-size: max(2.1rem, calc(83.33 * var(--u)));
-    line-height: 0.95;
-    letter-spacing: 0.01em;
-    font-weight: 900;
+    @apply text-4xl font-black leading-none tracking-tight md:text-5xl;
   }
   .text-statnum {
-    /* 2010 / 15+ / 3000+ */
-    font-size: max(1.75rem, calc(83.33 * var(--u)));
-    line-height: 1.16;
-    letter-spacing: 0.01em;
-    font-weight: 900;
+    @apply text-3xl font-black leading-tight tracking-tight md:text-4xl xl:text-5xl;
   }
   .text-empanel {
-    font-size: max(1.25rem, calc(45.83 * var(--u)));
-    line-height: 1.1;
-    font-weight: 700;
+    @apply text-xl font-bold leading-tight md:text-2xl;
   }
   .text-emsub {
-    font-size: max(1rem, calc(37.5 * var(--u)));
-    line-height: calc(45.83 / 37.5);
-    font-weight: 300;
+    @apply text-lg font-light leading-snug;
   }
   .text-case {
-    /* Case study titles */
-    font-size: max(0.85rem, calc(29.17 * var(--u)));
-    line-height: 1.1;
-    letter-spacing: 0.01em;
-    font-weight: 900;
+    @apply text-base font-black leading-tight tracking-tight sm:text-lg;
   }
   .text-casebody {
-    font-size: max(0.9rem, calc(25 * var(--u)));
-    line-height: 1.457;
-    font-weight: 300;
+    @apply text-base font-light leading-snug md:text-lg;
   }
   .text-mvv {
-    font-size: max(0.85rem, calc(25 * var(--u)));
-    line-height: 1.2;
-    letter-spacing: 0;
-    font-weight: 400;
+    @apply text-base font-normal leading-tight md:text-lg;
   }
   .text-mvvtitle {
-    font-size: max(1.15rem, calc(36 * var(--u)));
-    line-height: 1.1;
-    letter-spacing: 0;
-    font-weight: 900;
+    @apply text-2xl font-black leading-tight md:text-3xl;
   }
   .text-brandname {
-    font-size: max(1rem, calc(39.75 * var(--u)));
-    line-height: 1.1;
-    letter-spacing: 0.01em;
-    font-weight: 900;
+    @apply text-xl font-black leading-tight tracking-tight md:text-2xl;
   }
   .text-brandbody {
-    font-size: max(0.9rem, calc(26.5 * var(--u)));
-    line-height: 1.375;
-    font-weight: 300;
+    @apply text-base font-light leading-snug md:text-lg;
   }
   .text-brandurl {
-    font-size: max(0.9rem, calc(26.5 * var(--u)));
-    line-height: 1.2;
-    font-weight: 600;
+    @apply text-base font-semibold leading-tight md:text-lg;
   }
+  /* Section typography — breakpoint scale (replaces prior clamp() utilities). */
+  .text-section-title {
+    @apply break-words text-2xl font-black leading-tight tracking-tight sm:text-3xl md:text-4xl xl:text-5xl;
+  }
+  .text-section-body {
+    @apply text-base font-normal leading-loose md:text-lg xl:text-lg;
+  }
+  .text-section-sm {
+    @apply text-base font-normal leading-snug md:text-base xl:text-lg;
+  }
+  .text-section-lead {
+    @apply text-xl font-bold leading-snug md:text-2xl xl:text-2xl;
+  }
+  .text-stat-display {
+    @apply text-2xl font-black leading-tight tracking-tight sm:text-3xl md:text-5xl xl:text-6xl;
+  }
+  .text-journey-year {
+    @apply text-2xl font-bold leading-snug sm:text-3xl xl:text-3xl;
+  }
+  .text-journey-kicker {
+    @apply text-base font-bold leading-tight tracking-tight md:text-lg;
+  }
+  .text-journey-body {
+    @apply text-sm font-normal leading-snug sm:text-base xl:text-base;
+  }
+  .text-case-kicker {
+    @apply text-lg font-bold leading-tight tracking-wide sm:text-xl xl:text-xl;
+  }
+  .text-mvv-head {
+    @apply text-2xl font-black leading-tight tracking-tight sm:text-3xl xl:text-3xl;
+  }
+  /* Footer — matches header nav + intro body scale. */
   .text-foothead {
-    font-size: max(0.95rem, calc(30 * var(--u)));
-    line-height: 1.2;
-    font-weight: 700;
+    @apply text-base font-bold leading-tight sm:text-lg xl:text-lg;
   }
   .text-footlink {
-    font-size: max(0.8rem, calc(22 * var(--u)));
-    line-height: calc(36 / 22);
-    font-weight: 400;
+    @apply text-base font-normal leading-snug md:text-lg;
   }
   .text-footphone {
-    font-size: max(0.9rem, calc(27.91 * var(--u)));
-    line-height: 1.2;
-    font-weight: 600;
+    @apply text-base font-semibold leading-tight md:text-lg;
   }
   .text-footmail {
-    font-size: max(0.8rem, calc(22 * var(--u)));
-    line-height: 1.2;
-    font-style: italic;
-    font-weight: 500;
+    @apply text-base font-medium italic leading-tight md:text-lg;
   }
   .text-footaddr {
-    font-size: max(0.8rem, calc(22 * var(--u)));
-    line-height: 1.45;
-    font-weight: 600;
+    @apply text-base font-semibold leading-snug md:text-lg;
   }
   .text-footlabel {
-    font-size: max(0.85rem, calc(26.25 * var(--u)));
-    line-height: 1.2;
-    font-weight: 600;
+    @apply text-base font-semibold leading-tight md:text-lg;
   }
   .text-footsubmit {
-    font-size: max(0.8rem, calc(19.49 * var(--u)));
-    line-height: 1;
-    letter-spacing: normal;
-    font-weight: 700;
+    @apply text-sm font-bold leading-none sm:text-base xl:text-base;
   }
   .text-footcopy {
-    font-size: max(0.75rem, calc(22 * var(--u)));
-    line-height: 1.2;
-    font-weight: 600;
+    @apply text-sm font-semibold leading-tight sm:text-sm xl:text-base;
   }
 }

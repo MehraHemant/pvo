@@ -1,93 +1,104 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import CarouselArrow from './CarouselArrow.jsx'
-import { PsdBox, PsdStage, PsdText } from './Psd'
+import Container from './Container.jsx'
+import {
+  SWIPER_TOUCH_LOOP,
+  bindSwiperLoopFix,
+  duplicateSlidesForLoop,
+  fixSwiperLoop,
+} from '../lib/swiperCarousel.js'
 
-const TOP = 6973
-
-/** Visible strip on the PSD artboard (carousel viewport at xl). */
-const ROW = { x: 74, y: 246, w: 1766, h: 650 }
-
-/** Uniform card box on desktop; mobile scales via className. */
-const CARD = { w: 578, h: 650 }
+const AUTOPLAY_MS = 5000
 
 const CASES = [
   {
     src: '/case-bapu.jpg',
     alt: 'Bapu Jayanti — Gandhi Vichar Samagam stage event',
-    title: 'Bapu Jayanti',
-    text: 'Spearheaded awareness campaigns with thematic events, storytelling zones, and message-driven creative installations.'
+    title: 'BAPU JAYANTI',
+    text: 'Spearheaded awareness campaigns with thematic events, storytelling zones, and message-driven creative installations.',
   },
   {
     src: '/case-jagannath.jpg',
     alt: 'Jagannath Ji Yatra — roadside LED branding along the yatra route',
-    title: 'Jagannath Ji Yatra',
-    text: 'Organized laser light shows, experience zones, and branding outreach along the yatra route, creating strong community connect.'
+    title: 'JAGANNATH JI YATRA',
+    text: 'Organized laser light shows, experience zones, and branding outreach along the yatra route, creating strong community connect.',
   },
   {
     src: '/case-shravani.jpg',
     alt: 'Bihar Shravani Mela — Kanwar route outreach and crowd handling',
-    title: 'Bihar Shravani Mela',
-    text: 'Successfully managed spiritual outreach and crowd handling through visual campaigns, installations, and LED Vans across key Kanwar routes.'
-  }
+    title: 'BIHAR SHRAVANI MELA',
+    text: 'Successfully managed spiritual outreach and crowd handling through visual campaigns, installations, and LED Vans across key Kanwar routes.',
+  },
+  {
+    src: '/iec-1.jpg',
+    alt: 'IEC Campaign — branded outreach vans on a rural Bihar route',
+    title: 'IEC CAMPAIGN',
+    text: 'Delivered information, education, and communication drives with mobile vans, on-ground activations, and localized creative for rural audiences.',
+  },
+  {
+    src: '/PVO-Website-Banner-5.jpg',
+    alt: 'Kamal Mela — open-ground public gathering and stage branding',
+    title: 'KAMAL MELA',
+    text: 'Built high-energy experience zones, stage branding, and crowd engagement formats that amplified message recall at large public gatherings.',
+  },
+  {
+    src: '/iec-3.jpg',
+    alt: 'LED van activation — night-time branded vehicle on campaign route',
+    title: 'LED VAN ACTIVATION',
+    text: 'Deployed illuminated mobile units and route-based visibility to extend campaign reach across cities, highways, and high-footfall corridors.',
+  },
 ]
 
-/** Swiper breakpoints: 1 mobile / 640→2 / 1024→3 (fits ROW.w with CARD.w + gaps). */
+const CASE_SLIDES = duplicateSlidesForLoop(CASES, 3)
+
 const CASE_STUDIES_BREAKPOINTS = {
   640: { slidesPerView: 2, slidesPerGroup: 1, spaceBetween: 16 },
-  1024: { slidesPerView: 3, slidesPerGroup: 1, spaceBetween: 16 }
+  1024: { slidesPerView: 3, slidesPerGroup: 1, spaceBetween: 16 },
 }
 
-/** Inset from viewport / PSD artboard edges (matches Services). */
 const ARROW =
-  'absolute top-1/2 z-10 h-10 w-10 -translate-y-1/2 left-3 right-3 xl:top-[calc(425*var(--u))] xl:h-[calc(48*var(--u))] xl:w-[calc(48*var(--u))] xl:translate-y-0 xl:left-[calc(32*var(--u))] xl:right-[calc(32*var(--u))]'
+  'absolute top-1/2 z-10 h-10 w-10 -translate-y-1/2 md:-mt-6'
 
 function CaseStudyCard({ item, index, total }) {
   return (
-    <PsdBox
-      as="article"
-      w={CARD.w}
-      h={CARD.h}
+    <article
+      className="flex h-full flex-col text-center"
       role="group"
       aria-roledescription="slide"
       aria-label={`${item.title} (${index + 1} of ${total})`}
-      className="mx-auto flex h-full w-full max-w-[min(86%,38rem)] flex-col text-center max-xl:p-2 xl:max-w-none"
     >
-      <PsdBox
-        x={19}
-        y={10}
-        w={507}
-        h={386}
-        className="mb-4 aspect-[507/386] w-full shrink-0 overflow-hidden rounded-[18px] ring-[6px] ring-pvo-case-border md:mb-5 xl:mb-0"
-      >
-        <img src={item.src} alt={item.alt} className="block h-full w-full object-cover" />
-      </PsdBox>
-      <PsdText
-        as="h3"
-        x={168}
-        y={439}
-        w={201}
-        h={22}
-        className="mb-2 shrink-0 whitespace-nowrap font-display text-case uppercase text-[#2e3c4e] xl:mb-0 xl:text-center"
-      >
+      <div className="aspect-case overflow-hidden rounded-photo border-2 border-pvo-case-border md:rounded-card-md xl:rounded-card">
+        <img
+          src={item.src}
+          alt={item.alt}
+          className="object-cover-right h-full w-full object-cover transition duration-300 hover:scale-105"
+        />
+      </div>
+      <h3 className="mb-2 mt-3 text-case-kicker uppercase text-pvo-slate md:mt-3.5 xl:mt-4">
         {item.title}
-      </PsdText>
-      <PsdText
-        as="p"
-        x={8.34}
-        y={496.22}
-        w={520.14}
-        className="min-h-[clamp(4.5rem,12vw,7rem)] flex-1 text-center text-casebody text-[#2e3c4e] xl:mx-0 xl:min-h-[calc(120*var(--u))] xl:max-w-none xl:text-center"
-      >
+      </h3>
+      <p className="mx-auto max-w-prose-sm flex-1 text-section-sm leading-relaxed text-pvo-text-light">
         {item.text}
-      </PsdText>
-    </PsdBox>
+      </p>
+    </article>
   )
 }
 
 export default function CaseStudies() {
   const swiperRef = useRef(null)
+  const [reduceMotion, setReduceMotion] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const onChange = () => setReduceMotion(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
 
   const onKeyDown = useCallback((event) => {
     const delta = { ArrowRight: 1, ArrowLeft: -1 }[event.key]
@@ -98,76 +109,69 @@ export default function CaseStudies() {
   }, [])
 
   return (
-    <PsdStage
-      h={979}
+    <section
       id="projects"
-      data-psd="cases"
-      className="relative w-full overflow-hidden bg-pvo-surface py-16 md:py-24 xl:py-0"
+      className="section-y relative w-full overflow-hidden bg-pvo-surface"
+      aria-labelledby="case-studies-heading"
     >
-      <div className="px-[clamp(1.25rem,4.43vw,85px)] xl:px-0">
-        <PsdText
-          as="h2"
-          x={378}
-          y={7079 - TOP}
-          w={1161}
-          h={62}
-          className="mb-6 text-center font-display text-title uppercase text-[#2e3c4e] xl:mb-0 xl:whitespace-nowrap xl:text-left"
+      <Container>
+        <h2
+          id="case-studies-heading"
+          className="mb-4 md:mb-6 xl:mb-7 text-center text-section-title uppercase text-pvo-slate"
         >
-          Case Studies &amp; Highlights
-        </PsdText>
+          CASE STUDIES & HIGHLIGHTS
+        </h2>
 
-        <div className="relative mt-5 md:mt-8 xl:contents">
-          <PsdBox
-            data-carousel-scroller
-            tabIndex={0}
-            role="group"
-            aria-roledescription="carousel"
-            aria-label="Case studies, use the left and right arrow keys"
-            onKeyDown={onKeyDown}
-            x={ROW.x}
-            y={ROW.y}
-            w={ROW.w}
-            h={ROW.h}
-            className="w-full max-w-full overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#2e3c4e]"
+        <div
+          className="carousel-track mt-5 md:mt-7 xl:mt-8"
+          role="group"
+          aria-roledescription="carousel"
+          aria-label="Case studies highlights"
+          tabIndex={0}
+          onKeyDown={onKeyDown}
+        >
+          <Swiper
+            {...SWIPER_TOUCH_LOOP}
+            modules={[Autoplay]}
+            slidesPerView={1}
+            slidesPerGroup={1}
+            spaceBetween={24}
+            breakpoints={CASE_STUDIES_BREAKPOINTS}
+            loopAdditionalSlides={3}
+            autoplay={
+              reduceMotion
+                ? false
+                : {
+                    delay: AUTOPLAY_MS,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                  }
+            }
+            onSwiper={bindSwiperLoopFix(swiperRef)}
+            onBreakpoint={fixSwiperLoop}
+            onResize={fixSwiperLoop}
+            className="case-studies-swiper swiper-touch-carousel w-full overflow-hidden"
           >
-            <Swiper
-              loop
-              slidesPerView={1}
-              slidesPerGroup={1}
-              spaceBetween={24}
-              breakpoints={CASE_STUDIES_BREAKPOINTS}
-              loopAdditionalSlides={3}
-              watchSlidesProgress
-              observer
-              observeParents
-              onSwiper={(instance) => {
-                swiperRef.current = instance
-                instance.loopFix()
-              }}
-              onSlideChange={(instance) => instance.loopFix()}
-              className="case-studies-swiper h-full w-full overflow-hidden"
-            >
-              {CASES.map((item, i) => (
-                <SwiperSlide key={item.title} className="!h-full">
-                  <CaseStudyCard item={item} index={i} total={CASES.length} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </PsdBox>
+            {CASE_SLIDES.map((item, i) => (
+              <SwiperSlide key={`${item.title}-${i}`} className="!h-auto">
+                <CaseStudyCard item={item} index={i % CASES.length} total={CASES.length} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
           <CarouselArrow
             back
             label="Previous case study"
             onClick={() => swiperRef.current?.slidePrev()}
-            className={`${ARROW} !left-3 !right-auto xl:!left-[calc(32*var(--u))]`}
+            className={`${ARROW} left-0`}
           />
           <CarouselArrow
             label="Next case study"
             onClick={() => swiperRef.current?.slideNext()}
-            className={`${ARROW} !right-3 !left-auto xl:!right-[calc(32*var(--u))]`}
+            className={`${ARROW} right-0`}
           />
         </div>
-      </div>
-    </PsdStage>
+      </Container>
+    </section>
   )
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Container from './Container'
+import Container from './Container.jsx'
 import { psdLen, PsdBox, PsdStage, PsdText } from './Psd.jsx'
 
 const LINKS = [
@@ -67,25 +67,22 @@ export default function Footer() {
       as="footer"
       h={521}
       id="contact"
-      className="w-full overflow-hidden bg-pvo-footer pt-[clamp(1.5rem,3vw,58px)] text-white xl:pt-0"
+      className="w-full overflow-hidden bg-pvo-footer pt-6 text-white md:pt-10 xl:pt-0"
     >
-      <Container
-        inset="footer"
-        className="grid grid-cols-1 gap-8 pb-4 md:grid-cols-2 md:gap-10 md:pb-7 lg:grid-cols-[1fr_0.55fr_1.15fr] xl:contents"
-      >
+      <Container className="footer-cols xl:contents">
         <div className="xl:contents">
           <PsdText
             as="h3"
             x={243}
             y={58}
             w={222}
-            className="mb-4 text-foothead md:mb-5 xl:whitespace-nowrap xl:text-center xl:leading-[26px]"
+            className="mb-4 text-foothead md:mb-5 xl:whitespace-nowrap xl:text-center xl:leading-normal"
           >
             Corporate Office
           </PsdText>
           <ul className="grid gap-3 md:gap-4 xl:contents">
             <li className="xl:contents">
-              <div className="flex items-start gap-[clamp(0.5rem,0.68vw,13px)] xl:contents">
+              <div className="flex items-start gap-2 md:gap-2.5 xl:contents">
                 <PsdBox
                   as="img"
                   src="/psd/footer-phone.png"
@@ -102,14 +99,14 @@ export default function Footer() {
                   href="tel:+911204151246"
                   x={289}
                   y={116}
-                  className="text-footphone hover:underline xl:leading-[30px]"
+                  className="text-footphone hover:underline xl:leading-snug"
                 >
                   (+91) 120 415 1246
                 </PsdText>
               </div>
             </li>
             <li className="xl:contents">
-              <div className="flex items-start gap-[clamp(0.5rem,0.68vw,13px)] xl:contents">
+              <div className="flex items-start gap-2 md:gap-2.5 xl:contents">
                 <PsdBox
                   as="img"
                   src="/psd/footer-mail.png"
@@ -133,7 +130,7 @@ export default function Footer() {
               </div>
             </li>
             <li className="xl:contents">
-              <div className="flex items-start gap-[clamp(0.5rem,0.68vw,13px)] xl:contents">
+              <div className="flex items-start gap-2 md:gap-2.5 xl:contents">
                 <PsdBox
                   as="img"
                   src="/psd/footer-location.png"
@@ -150,7 +147,7 @@ export default function Footer() {
                   x={290}
                   y={219}
                   w={523}
-                  className="text-left text-footaddr xl:leading-[26px]"
+                  className="text-left text-footaddr xl:leading-normal"
                 >
                   Head office: Unit 901, Tower B, ITHUM TOWER,
                   <br />
@@ -161,7 +158,7 @@ export default function Footer() {
               </div>
             </li>
           </ul>
-          <div className="mt-4 flex items-center gap-[clamp(0.5rem,0.625vw,12px)] md:mt-6 xl:contents">
+          <div className="mt-4 flex items-center gap-2 md:mt-6 md:gap-3 xl:contents">
             {SOCIAL.map((item) => (
               <PsdBox
                 as="a"
@@ -191,7 +188,7 @@ export default function Footer() {
             x={879}
             y={59}
             w={156}
-            className="mb-4 text-foothead md:mb-5 xl:whitespace-nowrap xl:text-center xl:leading-[26px]"
+            className="mb-4 text-foothead md:mb-5 xl:whitespace-nowrap xl:text-center xl:leading-normal"
           >
             Quick Links
           </PsdText>
@@ -203,7 +200,7 @@ export default function Footer() {
                   href={link.href}
                   x={881}
                   y={117 + index * 36.0248}
-                  className="text-footlink uppercase hover:underline xl:leading-[20px]"
+                  className="text-footlink uppercase hover:underline xl:leading-snug"
                 >
                   {link.label}
                 </PsdText>
@@ -218,22 +215,22 @@ export default function Footer() {
             x={1169}
             y={60}
             w={146}
-            className="mb-4 text-foothead md:mb-5 xl:whitespace-nowrap xl:text-center xl:leading-[26px]"
+            className="mb-4 text-foothead md:mb-5 xl:whitespace-nowrap xl:text-center xl:leading-normal"
           >
             Contact Us
           </PsdText>
-          <form className="grid gap-[clamp(0.75rem,1.46vw,28px)] xl:contents" onSubmit={handleSubmit}>
+          <form className="grid gap-3 md:gap-5 xl:contents xl:gap-7" onSubmit={handleSubmit}>
             {FIELDS.map((field) => (
               <div
                 key={field.id}
-                className="grid grid-cols-1 items-center gap-1 sm:grid-cols-[7.5rem_1fr] sm:gap-4 xl:contents"
+                className="form-label-row xl:contents"
               >
                 <PsdText
                   as="label"
                   htmlFor={field.id}
                   x={1170}
                   y={field.y}
-                  className="text-footlabel xl:leading-[21.5px]"
+                  className="text-footlabel xl:leading-normal"
                 >
                   {field.label}
                 </PsdText>
@@ -246,20 +243,20 @@ export default function Footer() {
                   y={field.inputY}
                   w={378}
                   h={field.inputH}
-                  className="h-[clamp(2rem,2.14vw,41px)] w-full border-0 bg-white px-2 font-sans text-footlabel leading-relaxed text-pvo-text outline-none"
+                  className="h-8 w-full border-0 bg-white px-2 font-sans text-footlabel leading-relaxed text-pvo-text outline-none md:h-9 xl:h-input"
                   value={form[field.name]}
                   onChange={handleChange}
                   required
                 />
               </div>
             ))}
-            <div className="grid grid-cols-1 items-start gap-1 sm:grid-cols-[7.5rem_1fr] sm:gap-4 xl:contents">
+            <div className="form-label-row items-start xl:contents">
               <PsdText
                 as="label"
                 htmlFor="cf-message"
                 x={1170}
                 y={354}
-                className="text-footlabel sm:pt-2 xl:pt-0 xl:leading-[21.5px]"
+                className="text-footlabel sm:pt-2 xl:pt-0 xl:leading-normal"
               >
                 Message
               </PsdText>
@@ -271,14 +268,14 @@ export default function Footer() {
                 y={313}
                 w={378}
                 h={105}
-                className="min-h-[clamp(4rem,5.47vw,105px)] w-full resize-y border-0 bg-white px-2 py-1 font-sans text-footlabel leading-relaxed text-pvo-text outline-none xl:resize-none"
+                className="min-h-16 w-full resize-y border-0 bg-white px-2 py-1 font-sans text-footlabel leading-relaxed text-pvo-text outline-none md:min-h-20 xl:min-h-message xl:resize-none"
                 rows="4"
                 value={form.message}
                 onChange={handleChange}
                 required
               />
             </div>
-            <div className="grid grid-cols-1 items-center gap-1 sm:grid-cols-[7.5rem_1fr] sm:gap-4 xl:contents">
+            <div className="form-label-row xl:contents">
               <span className="hidden sm:block xl:hidden" aria-hidden="true" />
               <PsdBox
                 as="button"
@@ -287,7 +284,7 @@ export default function Footer() {
                 y={438}
                 w={377}
                 h={47}
-                className="inline-flex h-[clamp(2.25rem,2.45vw,47px)] w-full cursor-pointer items-center justify-center rounded-none border-0 bg-pvo-red-bright text-footsubmit uppercase text-white"
+                className="inline-flex h-9 w-full cursor-pointer items-center justify-center rounded-none border-0 bg-pvo-red-bright text-footsubmit uppercase text-white md:h-10 xl:h-submit"
               >
                 Sumbit
               </PsdBox>
@@ -304,16 +301,16 @@ export default function Footer() {
         className="hidden items-center xl:flex"
         aria-hidden="true"
       >
-        <span className="block h-[2px] w-full bg-white" />
+        <span className="block h-0.5 w-full bg-white" />
       </PsdBox>
 
-      <Container inset="footer" className="pb-4 md:pb-7 xl:contents">
+      <Container className="pb-4 md:pb-7 xl:contents">
         <PsdText
           as="p"
           x={228}
           y={429}
           w={647}
-          className="max-w-none border-t border-white pt-2 text-footcopy md:pt-3 xl:border-0 xl:whitespace-nowrap xl:pt-0 xl:text-center xl:leading-[22px]"
+          className="max-w-none border-t border-white pt-2 text-footcopy md:pt-3 xl:border-0 xl:whitespace-nowrap xl:pt-0 xl:text-center xl:leading-normal"
         >
           ©Copyright 2026 People Verdict Organization All Rights Reserved
         </PsdText>

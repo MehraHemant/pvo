@@ -17,6 +17,9 @@
  *   </PsdStage>
  *
  * Negative x/y are supported (several PSD decorations start off-canvas at x=-45).
+ *
+ * Intentional calc(): only here and in `src/styles.css` `@layer psd` (`--u`, `.psd-*`).
+ * Section JSX should use Tailwind fixed rem/px, not calc().
  */
 import { forwardRef } from 'react'
 
@@ -26,15 +29,15 @@ export function psdUnit(n) {
 }
 
 /**
- * Responsive length in PSD px that never collapses: scales with the viewport,
- * caps at `n`px above 1920, and floors at ~42% of `n` on small screens.
+ * Responsive length in PSD px that never collapses: scales with `--u`,
+ * caps at `n` PSD px, and floors at ~42% of `n` on small screens.
  * Safe to use at every breakpoint, including the mobile flow.
  */
 export function psdLen(n) {
   const abs = Math.abs(n)
   const min = Math.max(6, Math.round(abs * 0.42))
-  const val = `clamp(${min}px, calc(${abs} * var(--u)), ${abs}px)`
-  return n < 0 ? `calc(-1 * ${val})` : val
+  const val = `max(${min}px, calc(${abs} * var(--u)))`
+  return n < 0 ? `calc(-1 * max(${min}px, calc(${abs} * var(--u))))` : val
 }
 
 function geometry(x, y, w, h) {

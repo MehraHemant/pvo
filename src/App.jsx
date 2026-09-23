@@ -12,14 +12,14 @@ import Footer from './components/Footer.jsx'
 
 // The five blue dividers between sections are 49px tall in the PSD.
 function Bar() {
-  return <div className="h-[max(0.5rem,calc(49*var(--u)))] w-full bg-pvo-blue" aria-hidden="true" />
+  return <div className="h-2 w-full bg-pvo-blue xl:h-bar" aria-hidden="true" />
 }
 
 export default function App() {
   return (
     <>
       <Header />
-      <main>
+      <main className="min-w-0 overflow-x-clip">
         <Hero />
         <Introduction />
         <Bar />

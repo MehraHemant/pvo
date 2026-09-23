@@ -20,7 +20,8 @@ export default {
           navy: '#10365f',
           'navy-deep': '#0e2c55',
           'navy-mid': '#3e5f8f',
-          slate: '#384653',
+          slate: '#3c4a5a',
+          'slate-border': '#4a5561',
           amber: '#fbb03b',
           'amber-mid': '#fdc53f',
           yellow: '#f5e85a',
@@ -28,8 +29,8 @@ export default {
           red: '#ee2b34',
           'red-bright': '#fb0007',
           'red-dark': '#c81f27',
-          text: '#3c4853',
-          'text-light': '#3c4853',
+          text: '#37424f',
+          'text-light': '#5b6774',
           muted: '#8d98a3',
           surface: '#f8f8f8',
           'surface-alt': '#fafafc',
@@ -37,45 +38,79 @@ export default {
           border: '#e6e9ee',
           footer: '#569dd5',
           mint: '#cfe6e2',
-          bubble: '#93aee4',
-          'bubble-sm': '#a9d8e4',
-          'photo-border': '#4a5561',
+          periwinkle: '#93aee4',
+          'sky-dot': '#a9d8e4',
+          'teal-soft': '#a8d0ca',
+          'teal-mid': '#7fc4bc',
           'case-border': '#5aa4e0',
-          dot: '#9aa4ae',
-          'team-line': '#c9d4e2',
-          'mvv-line': '#cdd6e2',
+          carousel: '#2E3C4E',
+          'trait-border': '#c9d4e2',
+          'ring-pale': '#f5f8fd',
           'ceo-accent': '#4fc0f5',
-          icon: '#5ab4e8'
+          'hover-blue': '#046fca',
+          'empanel-icon': '#5ab4e8'
         }
       },
-      fontFamily: {
-        sans: ['Roboto', 'sans-serif'],
-        display: ['Roboto', 'sans-serif']
+      zIndex: {
+        header: '1000'
       },
-      fontSize: {
-        caption: ['clamp(0.7rem, 0.73vw, 0.875rem)', { lineHeight: '1.45' }],
-        menu: ['clamp(0.8rem, 0.94vw, 1.125rem)', { lineHeight: '1.4', letterSpacing: '0.02em' }],
-        copy: ['clamp(0.95rem, 1.35vw, 1.625rem)', { lineHeight: '1.75' }],
-        kicker: ['clamp(0.95rem, 1.15vw, 1.375rem)', { lineHeight: '1.4', letterSpacing: '0.02em' }],
-        lead: ['clamp(1.05rem, 1.25vw, 1.5rem)', { lineHeight: '1.3' }],
-        figure: ['clamp(1.15rem, 1.46vw, 1.75rem)', { lineHeight: '1.2' }],
-        title: ['clamp(2rem, 4.375vw, 5.25rem)', { lineHeight: '1.15', letterSpacing: '0.01em' }],
-        hero: ['clamp(2.1rem, 4.6vw, 5.5rem)', { lineHeight: '1.05', letterSpacing: '0.01em' }],
-        statnum: ['clamp(2.25rem, 4.5vw, 5.375rem)', { lineHeight: '1.15', letterSpacing: '-0.01em' }]
+      fontFamily: {
+        sans: ['Roboto', 'Montserrat', 'sans-serif']
       },
       spacing: {
-        page: '8.33vw'
+        page: '8.33vw',
+        17: '4.25rem',
+        13: '3.25rem',
+        30: '7.5rem'
       },
       maxWidth: {
-        '7xl': '83.34vw'
+        '7xl': '83.34vw',
+        site: '1500px',
+        'prose-sm': '26rem',
+        'prose-md': '34rem',
+        'prose-lg': '46rem',
+        brand: '56rem',
+        hero: '1920px',
+        empanel: '31.5625rem'
+      },
+      width: {
+        13: '3.25rem',
+        '11/12': '91.666667%'
+      },
+      height: {
+        34: '8.5rem',
+        50: '12.5rem',
+        bar: '49px',
+        input: '41px',
+        submit: '47px'
+      },
+      minHeight: {
+        'team-rotator-xs': '114.25rem',
+        'team-rotator-sm': '48.5rem',
+        'team-rotator-md': '18rem',
+        'team-rotator-lg': '21rem',
+        'team-card': '28rem',
+        message: '105px'
+      },
+      maxHeight: {
+        'team-photo': '14rem'
+      },
+      size: {
+        trait: '53px',
+        'intro-icon': '92px',
+        'intro-icon-xl': '148px',
+        'brand-xl': '248px'
       },
       borderRadius: {
         pill: '5px',
         photo: '9px',
+        'card-md': '11px',
         card: '14px'
       },
       borderWidth: {
-        logo: '10px'
+        logo: '10px',
+        12: '12px',
+        13: '13px'
       },
       boxShadow: {
         'pvo-xs': '0 1px 4px rgba(22, 40, 66, 0.06)',

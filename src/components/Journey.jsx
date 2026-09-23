@@ -1,82 +1,98 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
+import {
+  SWIPER_TOUCH_LOOP,
+  bindSwiperLoopFix,
+  duplicateSlidesForLoop,
+  fixSwiperLoop,
+} from '../lib/swiperCarousel.js'
+import Container from './Container.jsx'
 
-const AUTOPLAY_MS = 3000
-
-const SLIDES = [
+const LEGACY_SLIDES = [
   {
     year: '2009-10',
     title: 'STARTED WITH PASSION',
-    description: 'We have decided to follow our passion'
+    description: 'We have decided to follow our passion',
   },
   {
     year: '2014-15',
     title: 'YEAR OF CHANGE',
-    description: 'These were the years, where wehave Identified our strength and code'
+    description: 'These were the years, where wehave Identified our strength and code',
   },
   {
     year: '2016-18',
     title: 'YEAR OF INNOVATION',
-    description: 'Kamal Mela, Kamal Jatre, Selfie with Modi'
+    description: 'Kamal Mela, Kamal Jatre, Selfie with Modi',
   },
   {
     year: '2019',
     title: 'YEAR OF NARRATION',
-    description: 'Bharat ke man ki baat, Aakansha Peti'
+    description: 'Bharat ke man ki baat, Aakansha Peti',
   },
   {
     year: '2020-22',
     title: 'MISSION PATLIPUTRA',
-    description: 'Aatmanirbhar Bihar and BJP 4 WB Campaign'
+    description: 'Aatmanirbhar Bihar and BJP 4 WB Campaign',
   },
   {
     year: '2022',
     title: 'YEAR OF LANDMARK CAMPAIGN',
-    description: 'Aayega to modi hi, BJP campaign in Uttarakhand'
+    description: 'Aayega to modi hi, BJP campaign in Uttarakhand',
   },
   {
     year: '2023-24',
     title: 'Viksit Bharat',
-    description: 'Viksit Bharat, Fir ek bar Modi Sarkar'
+    description: 'Viksit Bharat, Fir ek bar Modi Sarkar',
   },
   {
     year: '2025',
     title: ' Cultural  Events',
     description:
-      'Mahakumbh-2025, Falgun mela khatu shyam 2025, Pandharpur wari mela, & Jagannath ji yatra '
-  }
+      'Mahakumbh-2025, Falgun mela khatu shyam 2025, Pandharpur wari mela, & Jagannath ji yatra ',
+  },
 ]
 
-const GAP = 'clamp(0.75rem,0.9vw,17px)'
+const AUTOPLAY_MS = 3000
 
-/** Swiper breakpoints: base 1 / 640→2 / 1024→4 visible; group always 1 for autoplay. */
+/** Swiper loop needs >2× max slidesPerView; 8 slides at 4-up is only 2×. */
+const JOURNEY_SLIDES = duplicateSlidesForLoop(
+  LEGACY_SLIDES.length > 4 * 2 ? LEGACY_SLIDES : [...LEGACY_SLIDES, ...LEGACY_SLIDES],
+  4
+)
+
 const JOURNEY_BREAKPOINTS = {
-  640: { slidesPerView: 2, slidesPerGroup: 1, spaceBetween: 14 },
-  1024: { slidesPerView: 4, slidesPerGroup: 1, spaceBetween: 17 }
+  0: { slidesPerView: 1, slidesPerGroup: 1, spaceBetween: 12 },
+  640: { slidesPerView: 2, slidesPerGroup: 1, spaceBetween: 16 },
+  1024: { slidesPerView: 4, slidesPerGroup: 1, spaceBetween: 18 },
 }
 
-function JourneyCard({ card, active }) {
-  const ink = active ? 'text-white' : 'text-[#2e3c4e]'
-  const shell = active ? 'bg-pvo-blue shadow-pvo-md' : 'bg-white shadow-pvo-sm'
+function JourneyCard({ card, isActive }) {
+  const cardBg = isActive ? 'bg-pvo-blue text-white shadow-pvo-md' : 'bg-white shadow-pvo-sm'
+  const yearClass = isActive
+    ? 'mb-2 inline-block rounded-pill bg-pvo-yellow-pill px-1.5 text-journey-year leading-tight text-pvo-slate'
+    : 'mb-2 inline-block text-journey-year leading-tight text-pvo-slate'
+  const titleClass = isActive
+    ? 'mb-1.5 text-journey-kicker uppercase text-white'
+    : 'mb-1.5 text-journey-kicker uppercase text-pvo-slate'
+  const descClass = isActive
+    ? 'text-journey-body leading-normal text-white/95'
+    : 'text-journey-body leading-normal text-pvo-text-light'
 
   return (
-    <article className={`flex h-full flex-col gap-2 rounded-[22px] px-5 py-12 ${shell} hover:shadow-lg`}>
-      {active ? (
-        <span className="inline-flex w-fit items-center rounded-pill bg-gradient-to-r from-orange-400 to-pvo-yellow-pill px-3 py-1 font-display text-figure text-[#2e3c4e]">
-          {card.year}
-        </span>
-      ) : (
-        <span className="font-display text-figure text-[#2e3c4e]">{card.year}</span>
-      )}
-      <h3 className={`font-display text-kicker uppercase ${ink}`}>{card.title}</h3>
-      <p className={`text-tiny ${ink}`}>{card.description}</p>
+    <article
+      className={`h-full rounded-photo p-4 transition duration-300 hover:-translate-y-1 hover:shadow-pvo-md md:rounded-card-md md:p-5 xl:rounded-card xl:p-6 ${cardBg}`}
+    >
+      <span className={yearClass}>{card.year}</span>
+      <h3 className={titleClass}>{card.title}</h3>
+      <p className={descClass}>{card.description}</p>
     </article>
   )
 }
 
 export default function Journey() {
+  const swiperRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [reduceMotion, setReduceMotion] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -89,40 +105,39 @@ export default function Journey() {
     return () => mq.removeEventListener('change', onChange)
   }, [])
 
+  const syncActiveIndex = (swiper) => {
+    setActiveIndex(swiper.realIndex)
+  }
+
   return (
     <section
-      data-psd="journey"
-      className="relative w-full overflow-hidden bg-pvo-surface py-[clamp(2.5rem,4.17vw,80px)]"
-      aria-roledescription="carousel"
-      aria-label="People Verdict journey timeline"
+      className="section-y relative w-full overflow-hidden bg-pvo-surface"
+      aria-labelledby="journey-heading"
     >
-      <div className="mx-auto w-full max-w-[1920px] px-[clamp(1.25rem,4.43vw,85px)]">
-        <h2 className="mb-[clamp(1.5rem,3vw,58px)] text-center font-display text-title uppercase text-[#2e3c4e]">
-          Journey
+      <Container>
+        <h2
+          id="journey-heading"
+          className="mb-4 md:mb-6 xl:mb-7 text-center text-section-title uppercase text-pvo-slate"
+        >
+          JOURNEY
         </h2>
-
-        <div className="mb-5 space-y-4 text-copy text-[#2e3c4e] md:mb-8">
+        <div className="prose-strong mb-5 text-section-body text-pvo-text-light md:mb-7 xl:mb-8">
           <p>
             The journey of People Verdict began in 2010 with a vision to transform political and public
-            outreach in India. Over the years, we have built a robust ecosystem of communication and activation
-            tools, consistently innovating in how leaders interact with citizens.
-          </p>
-          <p>
+            outreach in India. Over the years, we have built a robust ecosystem of communication and
+            activation tools, consistently innovating in how leaders interact with citizens.
+            <br />
             From humble beginnings to handling large-scale nationwide campaigns, the organization has grown
-            exponentially—diversifying into digital outreach, media, event management, and more. Our deep
-            understanding of rural and urban voter psychology has made us the preferred choice for many state
-            and central government projects, as well as political clients.
+            exponentially&mdash;diversifying into digital outreach, media, event management, and more. Our
+            deep understanding of rural and urban voter psychology has made us the preferred choice for many
+            state and central government projects, as well as political clients.
           </p>
         </div>
 
-        <div
-          data-carousel-scroller
-          className="journey-swiper mx-auto mt-[clamp(1.5rem,4.7vw,91px)] focus-within:outline focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-[#2e3c4e]"
-          style={{ ['--journey-gap']: GAP }}
-        >
+        <div className="journey-swiper mt-5 md:mt-7 xl:mt-8">
           <Swiper
+            {...SWIPER_TOUCH_LOOP}
             modules={[Autoplay]}
-            loop
             slidesPerView={1}
             slidesPerGroup={1}
             spaceBetween={12}
@@ -134,28 +149,25 @@ export default function Journey() {
                 : {
                     delay: AUTOPLAY_MS,
                     disableOnInteraction: false,
-                    pauseOnMouseEnter: true
+                    pauseOnMouseEnter: true,
                   }
             }
-            onSwiper={(swiper) => setActiveIndex(swiper.realIndex)}
-            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-            className="w-full "
+            onSwiper={bindSwiperLoopFix(swiperRef, syncActiveIndex)}
+            onSlideChange={syncActiveIndex}
+            onBreakpoint={fixSwiperLoop}
+            onResize={fixSwiperLoop}
+            className="journey-swiper-track swiper-touch-carousel w-full overflow-hidden"
+            aria-roledescription="carousel"
+            aria-label="People Verdict journey timeline"
           >
-            {SLIDES.map((card, i) => (
-              <SwiperSlide key={card.year} className="!h-auto">
-                <div
-                  role="group"
-                  aria-roledescription="slide"
-                  aria-label={`${card.year}, ${card.title} (${i + 1} of ${SLIDES.length})`}
-                  className="h-full py-8"
-                >
-                  <JourneyCard card={card} active={i === activeIndex} />
-                </div>
+            {JOURNEY_SLIDES.map((card, index) => (
+              <SwiperSlide key={`${card.year}-${index}`} className="!h-auto py-6">
+                <JourneyCard card={card} isActive={activeIndex === index} />
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

@@ -2,11 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import CarouselDots from './CarouselDots.jsx'
+import { SWIPER_TOUCH_LOOP, bindSwiperLoopFix, fixSwiperLoop } from '../lib/swiperCarousel.js'
 
-// All five banners are 1920x750, the PSD hero height. The width/height
-// attributes reserve that ratio before the JPEGs decode, so the section is
-// 750 tall from first paint.
 const BANNERS = [
   {
     src: '/PVO-Website-Banner-1.jpg',
@@ -39,7 +36,6 @@ const AUTOPLAY_MS = 5000
 
 export default function Hero() {
   const swiperRef = useRef(null)
-  const [activeIndex, setActiveIndex] = useState(0)
   const [reduceMotion, setReduceMotion] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
   )
@@ -70,79 +66,48 @@ export default function Hero() {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-pvo-parchment"
+      className="w-full overflow-hidden bg-pvo-parchment"
       id="home"
       aria-roledescription="carousel"
       aria-label="People Verdict campaign highlights"
+      onKeyDown={onKeyDown}
+      tabIndex={0}
     >
-      <div
-        data-carousel-scroller
-        tabIndex={0}
-        role="group"
-        aria-label="Campaign banners, use the left and right arrow keys"
-        onKeyDown={onKeyDown}
-        className="overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#2E3C4E]"
+      <Swiper
+        {...SWIPER_TOUCH_LOOP}
+        modules={[Autoplay]}
+        slidesPerView={1}
+        slidesPerGroup={1}
+        spaceBetween={0}
+        loopAdditionalSlides={4}
+        autoplay={
+          reduceMotion
+            ? false
+            : {
+                delay: AUTOPLAY_MS,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }
+        }
+        onSwiper={bindSwiperLoopFix(swiperRef)}
+        onBreakpoint={fixSwiperLoop}
+        onResize={fixSwiperLoop}
+        className="hero-swiper swiper-touch-carousel w-full"
       >
-        <Swiper
-          modules={[Autoplay]}
-          loop
-          slidesPerView={1}
-          slidesPerGroup={1}
-          spaceBetween={0}
-          loopAdditionalSlides={4}
-          watchSlidesProgress
-          observer
-          observeParents
-          autoplay={
-            reduceMotion
-              ? false
-              : {
-                  delay: AUTOPLAY_MS,
-                  disableOnInteraction: false,
-                  pauseOnMouseEnter: true
-                }
-          }
-          onSwiper={(instance) => {
-            swiperRef.current = instance
-            setActiveIndex(instance.realIndex)
-            instance.loopFix()
-          }}
-          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-          className="hero-swiper w-full overflow-hidden"
-        >
-          {BANNERS.map((banner, i) => (
-            <SwiperSlide key={banner.src}>
-              <div
-                role="group"
-                aria-roledescription="slide"
-                aria-label={`${banner.title} (${i + 1} of ${BANNERS.length})`}
-              >
-                <img
-                  src={banner.src}
-                  alt={banner.alt}
-                  width={1920}
-                  height={750}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  decoding="async"
-                  className="mx-auto block h-auto w-full"
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-
-      <div className="pointer-events-none absolute bottom-[clamp(0.5rem,1.15vw,22px)] left-1/2 z-10 -translate-x-1/2 [&>div]:mt-0 [&>div]:gap-[clamp(5px,0.42vw,8px)]">
-        <div className="pointer-events-auto">
-          <CarouselDots
-            count={BANNERS.length}
-            index={activeIndex}
-            onSelect={(i) => swiperRef.current?.slideToLoop(i)}
-            groupLabel="Choose a banner"
-            itemLabel={(i) => `Show ${BANNERS[i].title}`}
-          />
-        </div>
-      </div>
+        {BANNERS.map((banner, i) => (
+          <SwiperSlide key={banner.src}>
+            <img
+              src={banner.src}
+              alt={banner.alt}
+              width={1920}
+              height={750}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              className="mx-auto h-auto w-full max-w-hero"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </section>
   )
 }
