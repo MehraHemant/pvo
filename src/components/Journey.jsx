@@ -156,6 +156,7 @@ export default function Journey() {
             onSlideChange={syncActiveIndex}
             onBreakpoint={fixSwiperLoop}
             onResize={fixSwiperLoop}
+            onSlideChangeTransitionEnd={fixSwiperLoop}
             className="journey-swiper-track swiper-touch-carousel w-full overflow-hidden"
             aria-roledescription="carousel"
             aria-label="People Verdict journey timeline"

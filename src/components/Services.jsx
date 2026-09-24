@@ -176,6 +176,7 @@ export default function Services() {
             onSwiper={bindSwiperLoopFix(swiperRef)}
             onBreakpoint={fixSwiperLoop}
             onResize={fixSwiperLoop}
+            onSlideChangeTransitionEnd={fixSwiperLoop}
             className="services-swiper swiper-touch-carousel w-full overflow-hidden"
             aria-roledescription="carousel"
             aria-label="Service campaign groups"

@@ -2,7 +2,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import { SWIPER_TOUCH_LOOP, bindSwiperLoopFix, fixSwiperLoop } from './swiperLoop.js'
+import {
+  SWIPER_TOUCH_LOOP,
+  bindSwiperLoopFix,
+  duplicateSlidesForLoop,
+  fixSwiperLoop,
+} from './swiperLoop.js'
 
 const BANNERS = [
   {
@@ -31,6 +36,8 @@ const BANNERS = [
     alt: 'Kamal Mela — a festival of thematic stalls and stages built around public communication'
   }
 ]
+
+const HERO_SLIDES = duplicateSlidesForLoop(BANNERS, 1)
 
 const AUTOPLAY_MS = 5000
 
@@ -68,46 +75,55 @@ export default function Hero() {
     <section
       className="w-full overflow-hidden bg-pvo-parchment"
       id="home"
-      aria-roledescription="carousel"
-      aria-label="People Verdict campaign highlights"
-      onKeyDown={onKeyDown}
-      tabIndex={0}
+      aria-labelledby="hero-carousel-label"
     >
-      <Swiper
-        {...SWIPER_TOUCH_LOOP}
-        modules={[Autoplay]}
-        slidesPerView={1}
-        slidesPerGroup={1}
-        spaceBetween={0}
-        loopAdditionalSlides={4}
-        autoplay={
-          reduceMotion
-            ? false
-            : {
-                delay: AUTOPLAY_MS,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true,
-              }
-        }
-        onSwiper={bindSwiperLoopFix(swiperRef)}
-        onBreakpoint={fixSwiperLoop}
-        onResize={fixSwiperLoop}
-        className="hero-swiper swiper-touch-carousel w-full"
+      <div
+        className="min-w-0 overflow-hidden"
+        role="group"
+        aria-roledescription="carousel"
+        aria-label="People Verdict campaign highlights"
+        id="hero-carousel-label"
+        tabIndex={0}
+        onKeyDown={onKeyDown}
       >
-        {BANNERS.map((banner, i) => (
-          <SwiperSlide key={banner.src}>
-            <img
-              src={banner.src}
-              alt={banner.alt}
-              width={1920}
-              height={750}
-              loading={i === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-              className="mx-auto h-auto w-full max-w-hero"
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+        <Swiper
+          {...SWIPER_TOUCH_LOOP}
+          modules={[Autoplay]}
+          slidesPerView={1}
+          slidesPerGroup={1}
+          spaceBetween={0}
+          loopAdditionalSlides={1}
+          autoplay={
+            reduceMotion
+              ? false
+              : {
+                  delay: AUTOPLAY_MS,
+                  disableOnInteraction: false,
+                  pauseOnMouseEnter: true,
+                }
+          }
+          onSwiper={bindSwiperLoopFix(swiperRef)}
+          onBreakpoint={fixSwiperLoop}
+          onResize={fixSwiperLoop}
+          onSlideChangeTransitionEnd={fixSwiperLoop}
+          className="hero-swiper swiper-touch-carousel w-full overflow-hidden"
+        >
+          {HERO_SLIDES.map((banner, i) => (
+            <SwiperSlide key={`${banner.src}-${i}`}>
+              <img
+                src={banner.src}
+                alt={banner.alt}
+                width={1920}
+                height={750}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+                draggable={false}
+                className="mx-auto block h-auto w-full max-w-hero"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </section>
   )
 }
