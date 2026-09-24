@@ -14,15 +14,15 @@ const GROUPS = [
     title: 'IEC CAMPAIGN',
     images: [
       {
-        src: '/PVO-Website-Banner-3.jpg',
+        src: '/ice1.webp',
         alt: 'IEC Campaign — branded LED vans for a Bihar agriculture outreach drive',
       },
       {
-        src: '/PVO-Website-Banner-5.jpg',
+        src: '/ice2.webp',
         alt: 'IEC Campaign — open-ground public gathering at Kamal Mela',
       },
       {
-        src: '/PVO-Website-Banner-4.jpg',
+        src: '/ice3.webp',
         alt: 'IEC Campaign — rural audience at a Shravani Mela LED van activation',
       },
     ],

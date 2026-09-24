@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import Container from './Container.jsx'
 
 const MEMBERS_PER_PAGE = 4
-const ROTATION_INTERVAL_MS = 3000
+const ROTATION_INTERVAL_MS = 8000
 const FADE_DURATION_MS = 500
 const TRAITS = [
   {
@@ -157,10 +157,6 @@ export default function Team() {
       aria-labelledby="team-heading"
     >
       <span
-        className="pointer-events-none absolute -bottom-28 left-1/6 z-0 hidden size-80 rounded-full border-4 border-pvo-ring-pale bg-transparent xl:block xl:-bottom-28 xl:size-96 xl:border-8"
-        aria-hidden="true"
-      ></span>
-      <span
         className="pointer-events-none absolute -left-40 top-1/2 z-0 hidden size-28 rounded-full border-[28px] border-pvo-blue bg-transparent xl:block xl:size-56"
         aria-hidden="true"
       ></span>
@@ -202,10 +198,10 @@ export default function Team() {
                 <span className="mx-auto mb-2.5 block size-8 text-pvo-blue md:mb-3 md:size-10 xl:size-trait">
                   {trait.icon}
                 </span>
-                <h3 className="mb-1 text-sm font-bold uppercase leading-snug tracking-tight text-pvo-navy sm:text-base">
+                <h3 className="mb-1 text-sm font-semibold uppercase leading-snug text-pvo-navy">
                   {trait.title}
                 </h3>
-                <p className="text-xs font-medium leading-normal text-pvo-text-light sm:text-sm md:text-base">
+                <p className="text-xs leading-normal text-pvo-text-light sm:text-sm">
                   {trait.text}
                 </p>
               </div>
