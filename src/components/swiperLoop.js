@@ -25,14 +25,15 @@ export function fixSwiperLoop(instance) {
   instance?.loopFix()
 }
 
-/** Minimum slide count so Swiper loop works at a given max slidesPerView. */
+/** Minimum slide count so Swiper loop works at a given max slidesPerView (>2×, not ≥2×). */
 export function duplicateSlidesForLoop(slides, maxSlidesPerView) {
-  if (slides.length >= maxSlidesPerView * 2) return slides
-  const copies = Math.ceil((maxSlidesPerView * 2) / slides.length)
+  const minimum = maxSlidesPerView * 2 + 1
+  if (slides.length >= minimum) return slides
+  const copies = Math.ceil(minimum / slides.length)
   return Array.from({ length: copies }, () => slides).flat()
 }
 
 if (import.meta.env?.DEV) {
-  const cases = duplicateSlidesForLoop([1, 2, 3], 3)
-  console.assert(cases.length >= 6, 'CaseStudies loop: need ≥6 slides for 3-up at lg')
+  const cases = duplicateSlidesForLoop([1, 2, 3, 4, 5, 6], 3)
+  console.assert(cases.length > 6, 'CaseStudies loop: need >6 slides for 3-up at lg')
 }

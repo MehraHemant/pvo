@@ -26,14 +26,10 @@ export default function Introduction() {
   return (
     <section className="intro-section-y relative w-full overflow-hidden bg-white" id="about">
       <span
-        className="pointer-events-none absolute -left-2.5 top-1.5 z-0 h-12 w-24 md:left-2 md:top-3 md:h-16 md:w-32 xl:left-6 xl:top-4 xl:h-24 xl:w-40"
+        className="pointer-events-none absolute left-0 -top-3 xl:-top-8 z-0 h-12 w-24 md:h-16 md:w-32 xl:h-36 xl:w-60"
         aria-hidden="true"
       >
-        <svg viewBox="0 0 170 90" fill="none" strokeWidth="5" strokeLinecap="round" className="h-full w-full">
-          <path d="M8 62c-4-14 6-26 16-22s6 22-6 22-16-14-6-26" stroke="#f2c14e" />
-          <path d="M40 58c-6-18 8-34 22-28s8 32-8 32-20-18-8-34" stroke="#f08b6a" />
-          <path d="M74 46C66 20 92 2 112 12s10 40-10 40" stroke="#ef6f7b" />
-        </svg>
+   <img src='/decor.png' alt='decor' className='h-full w-full object-contain' />
       </span>
       <span
         className="pointer-events-none absolute -right-12 -top-16 z-0 size-28 rounded-full bg-pvo-mint md:-right-8 md:-top-12 md:size-36 xl:-right-5 xl:-top-8 xl:size-48"

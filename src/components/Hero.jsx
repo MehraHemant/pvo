@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import { SWIPER_TOUCH_LOOP, bindSwiperLoopFix, fixSwiperLoop } from '../lib/swiperCarousel.js'
+import { SWIPER_TOUCH_LOOP, bindSwiperLoopFix, fixSwiperLoop } from './swiperLoop.js'
 
 const BANNERS = [
   {

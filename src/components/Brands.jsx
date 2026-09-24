@@ -28,7 +28,7 @@ export default function Brands() {
         <h2 className="mb-4 text-center text-section-title uppercase text-pvo-slate md:mb-6 xl:mb-7">
           OUR BRANDS
         </h2>
-        <div className="mx-auto mt-6 grid max-w-brand grid-cols-1 gap-10 md:mt-9 md:grid-cols-2 md:gap-12 xl:mt-10 xl:gap-16">
+        <div className="mx-auto mt-6 grid max-w-6xl grid-cols-1 gap-10 md:mt-9 md:grid-cols-2 md:gap-12 xl:mt-10 xl:gap-16">
           {brands.map((brand) => (
             <article key={brand.key} className="text-center">
               <div className="mx-auto mb-4 grid size-36 place-items-center rounded-full bg-brand-circle shadow-pvo-brand md:mb-6 md:size-48 xl:mb-7 xl:size-brand-xl">

@@ -7,7 +7,7 @@ import {
   bindSwiperLoopFix,
   duplicateSlidesForLoop,
   fixSwiperLoop,
-} from '../lib/swiperCarousel.js'
+} from './swiperLoop.js'
 import Container from './Container.jsx'
 
 const LEGACY_SLIDES = [

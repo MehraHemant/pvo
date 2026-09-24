@@ -9,7 +9,7 @@ import {
   bindSwiperLoopFix,
   duplicateSlidesForLoop,
   fixSwiperLoop,
-} from '../lib/swiperCarousel.js'
+} from './swiperLoop.js'
 
 const AUTOPLAY_MS = 5000
 
@@ -137,7 +137,7 @@ export default function CaseStudies() {
             slidesPerGroup={1}
             spaceBetween={24}
             breakpoints={CASE_STUDIES_BREAKPOINTS}
-            loopAdditionalSlides={3}
+            loopAdditionalSlides={4}
             autoplay={
               reduceMotion
                 ? false
@@ -150,6 +150,7 @@ export default function CaseStudies() {
             onSwiper={bindSwiperLoopFix(swiperRef)}
             onBreakpoint={fixSwiperLoop}
             onResize={fixSwiperLoop}
+            onSlideChangeTransitionEnd={fixSwiperLoop}
             className="case-studies-swiper swiper-touch-carousel w-full overflow-hidden"
           >
             {CASE_SLIDES.map((item, i) => (
@@ -163,12 +164,12 @@ export default function CaseStudies() {
             back
             label="Previous case study"
             onClick={() => swiperRef.current?.slidePrev()}
-            className={`${ARROW} left-0`}
+            className={`${ARROW} left-0 top-[40%]`}
           />
           <CarouselArrow
             label="Next case study"
             onClick={() => swiperRef.current?.slideNext()}
-            className={`${ARROW} right-0`}
+            className={`${ARROW} right-0 top-[40%]`}
           />
         </div>
       </Container>

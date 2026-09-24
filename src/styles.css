@@ -76,10 +76,7 @@
     }
   }
 
-  /*
-   Footer reflow uses .site-container; at xl+ footer columns use PSD x≈243…1680
-   inside the centred 1920 artboard. Match that channel in the header bar.
-   */
+  /* Wide header: align nav with main content channel (matches .site-container). */
   @media (min-width: 1200px) {
     header .site-container {
       @apply max-w-none px-0;

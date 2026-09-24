@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import CarouselArrow from './CarouselArrow.jsx'
 import Container from './Container.jsx'
-import { SWIPER_TOUCH_LOOP, bindSwiperLoopFix, fixSwiperLoop } from '../lib/swiperCarousel.js'
+import { SWIPER_TOUCH_LOOP, bindSwiperLoopFix, fixSwiperLoop } from './swiperLoop.js'
 
 const AUTOPLAY_MS = 3000
 
@@ -28,35 +28,52 @@ const GROUPS = [
     ],
   },
   {
-    title: 'LED VAN ACTIVATION',
+    title: 'OUTDOOR / DOOH',
     images: [
       {
-        src: '/PVO-Website-Banner-1.jpg',
+        src: '/dooh1.webp',
         alt: 'Jagannath Ji Yatra — roadside LED branding along the yatra route',
       },
       {
-        src: '/PVO-Website-Banner-2.jpg',
+        src: '/dooh2.jpeg',
         alt: 'Bapu 150 Celebration — when an event venue became a story',
       },
       {
-        src: '/PVO-Website-Banner-5.jpg',
+        src: '/dooh3.jpeg',
         alt: 'Open-ground public gathering at a Kamal Mela activation',
       },
     ],
   },
   {
-    title: 'CULTURAL EVENTS',
+    title: 'MOBILITY (MASS OUTREACH)',
     images: [
       {
-        src: '/case-bapu.jpg',
+        src: '/mobility1.webp',
         alt: 'Bapu Jayanti — Gandhi Vichar Samagam stage event',
       },
       {
-        src: '/case-jagannath.jpg',
+        src: '/mobility2.webp',
         alt: 'Jagannath Ji Yatra — community branding along the yatra route',
       },
       {
-        src: '/case-shravani.jpg',
+        src: '/mobility3.jpeg',
+        alt: 'Bihar Shravani Mela — Kanwar route outreach and crowd handling',
+      },
+    ],
+  },
+  {
+    title: 'TECHNOLOGY',
+    images: [
+      {
+        src: '/Technology1.jpeg',
+        alt: 'Bapu Jayanti — Gandhi Vichar Samagam stage event',
+      },
+      {
+        src: '/Technology2.jpeg',
+        alt: 'Jagannath Ji Yatra — community branding along the yatra route',
+      },
+      {
+        src: '/Technology3.jpeg',
         alt: 'Bihar Shravani Mela — Kanwar route outreach and crowd handling',
       },
     ],
@@ -182,12 +199,12 @@ export default function Services() {
             back
             label="Previous service campaign"
             onClick={() => swiperRef.current?.slidePrev()}
-            className={`${ARROW} left-0`}
+            className={`${ARROW} left-0 translate-y-[50%]`}
           />
           <CarouselArrow
             label="Next service campaign"
             onClick={() => swiperRef.current?.slideNext()}
-            className={`${ARROW} right-0`}
+            className={`${ARROW} right-0 translate-y-[50%]`}
           />
         </div>
       </Container>
