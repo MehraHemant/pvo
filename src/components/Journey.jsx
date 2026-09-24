@@ -68,32 +68,24 @@ const JOURNEY_BREAKPOINTS = {
   1024: { slidesPerView: 4, slidesPerGroup: 1, spaceBetween: 18 },
 }
 
-function JourneyCard({ card, isActive }) {
-  const cardBg = isActive ? 'bg-pvo-blue text-white shadow-pvo-md' : 'bg-white shadow-pvo-sm'
-  const yearClass = isActive
-    ? 'mb-2 inline-block rounded-pill bg-pvo-yellow-pill px-1.5 text-journey-year leading-tight text-pvo-slate'
-    : 'mb-2 inline-block text-journey-year leading-tight text-pvo-slate'
-  const titleClass = isActive
-    ? 'mb-1.5 text-journey-kicker uppercase text-white'
-    : 'mb-1.5 text-journey-kicker uppercase text-pvo-slate'
-  const descClass = isActive
-    ? 'text-journey-body leading-normal text-white/95'
-    : 'text-journey-body leading-normal text-pvo-text-light'
-
+function JourneyCard({ card }) {
   return (
-    <article
-      className={`h-full rounded-photo p-4 transition duration-300 hover:-translate-y-1 hover:shadow-pvo-md md:rounded-card-md md:p-5 xl:rounded-card xl:p-6 ${cardBg}`}
-    >
-      <span className={yearClass}>{card.year}</span>
-      <h3 className={titleClass}>{card.title}</h3>
-      <p className={descClass}>{card.description}</p>
+    <article className="journey-card h-full rounded-photo bg-white p-4 shadow-pvo-sm transition duration-300 hover:-translate-y-1 hover:shadow-pvo-md md:rounded-card-md md:p-5 xl:rounded-card xl:p-6">
+      <span className="journey-card__year mb-2 inline-block text-journey-year leading-tight text-pvo-slate">
+        {card.year}
+      </span>
+      <h3 className="journey-card__title mb-1.5 text-journey-kicker uppercase text-pvo-slate">
+        {card.title}
+      </h3>
+      <p className="journey-card__desc text-journey-body leading-normal text-pvo-text-light">
+        {card.description}
+      </p>
     </article>
   )
 }
 
 export default function Journey() {
   const swiperRef = useRef(null)
-  const [activeIndex, setActiveIndex] = useState(0)
   const [reduceMotion, setReduceMotion] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
   )
@@ -104,10 +96,6 @@ export default function Journey() {
     mq.addEventListener('change', onChange)
     return () => mq.removeEventListener('change', onChange)
   }, [])
-
-  const syncActiveIndex = (swiper) => {
-    setActiveIndex(swiper.realIndex)
-  }
 
   return (
     <section
@@ -152,8 +140,7 @@ export default function Journey() {
                     pauseOnMouseEnter: true,
                   }
             }
-            onSwiper={bindSwiperLoopFix(swiperRef, syncActiveIndex)}
-            onSlideChange={syncActiveIndex}
+            onSwiper={bindSwiperLoopFix(swiperRef)}
             onBreakpoint={fixSwiperLoop}
             onResize={fixSwiperLoop}
             onSlideChangeTransitionEnd={fixSwiperLoop}
@@ -163,7 +150,7 @@ export default function Journey() {
           >
             {JOURNEY_SLIDES.map((card, index) => (
               <SwiperSlide key={`${card.year}-${index}`} className="!h-auto py-6">
-                <JourneyCard card={card} isActive={activeIndex === index} />
+                <JourneyCard card={card} />
               </SwiperSlide>
             ))}
           </Swiper>

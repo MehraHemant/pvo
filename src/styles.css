@@ -290,6 +290,20 @@
     }
   }
 
+  /* Active card: Swiper marks the leftmost visible slide (incl. loop clones). */
+  .journey-swiper .swiper-slide-active .journey-card {
+    @apply bg-pvo-blue text-white shadow-pvo-md;
+  }
+  .journey-swiper .swiper-slide-active .journey-card__year {
+    @apply rounded-pill bg-pvo-yellow-pill px-1.5 text-pvo-slate;
+  }
+  .journey-swiper .swiper-slide-active .journey-card__title {
+    @apply text-white;
+  }
+  .journey-swiper .swiper-slide-active .journey-card__desc {
+    @apply text-white/95;
+  }
+
   /* Legacy PSD token names — breakpoint type scale (no var(--u) on font-size). */
   .text-tiny {
     @apply text-xs font-light leading-snug md:text-sm;
