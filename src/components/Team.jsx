@@ -47,13 +47,14 @@ const TEAM_MEMBERS = [
   {
     name: 'Aarti',
     role: 'Sr.Manager Tender & Government Project',
-    image: '/Team Images/Anshu.jpg',
-    bio: 'Aarti manages tenders, government projects with precision and expertise. She ensures execution, compliance, and timely delivery.'
+    image: '/Team Images/arti.jpeg',
+    bio: 'Aarti manages tenders and government projects with precision and expertise. She ensures execution, compliance, and timely delivery.'
   },
+
   {
     name: 'Ishwar',
     role: 'Business Planning & Development',
-    image: '/Team Images/ishu.jpg',
+    image: '/Team Images/Ishwar.jpeg',
     bio: 'Passionate about travel, nature, and experiential marketing. She brings creativity and fresh energy to every project.'
   },
   {
@@ -63,28 +64,28 @@ const TEAM_MEMBERS = [
     bio: 'Energetic and dedicated, Avinash drives social media campaigns with fresh ideas. From Mission Pataliputra to Viksit Bharat, he consistently delivers strong results.'
   },
   {
-    name: 'Anuj',
-    role: 'Project Coordinator',
+    name: 'Anuj Kumar',
+    role: 'Lead Visual Designer',
     image: '/Team Images/Anuj.jpg',
-    bio: 'Anuj keeps cross-functional projects on track with clear timelines, stakeholder alignment, and dependable follow-through.'
+    bio: 'Senior Graphic Designer turning ideas into impactful visuals. Blending creativity and strategy across branding, digital, print, and motion.'
+  },
+  {
+    name: 'Anshu',
+    role: 'Head Accounts',
+    image: '/Team Images/Anshu.jpg',
+    bio: 'Experienced and dedicated, Anshu keeps every number in perfect order. Her expertise ensures smooth and reliable financial operations.'
   },
   {
     name: 'Ashwani',
-    role: 'Creative Director',
+    role: 'Operations Manager',
     image: '/Team Images/Ashwani.png',
-    bio: 'Ashwani shapes campaign narratives and visual identity, blending insight with bold creative direction for public-facing work.'
+    bio: 'Dynamic Operations Head with a passion for impactful political campaigns. Ashwani brings energy, leadership, and a strong on-ground understanding.'
   },
   {
-    name: 'Tanishka',
-    role: 'Client Relations Manager',
+    name: 'Tanishka Aditi',
+    role: 'Business Development Manager',
     image: '/Team Images/Tanishka.png',
-    bio: 'Tanishka builds trusted client partnerships and ensures every engagement reflects our commitment to clarity and results.'
-  },
-  {
-    name: 'Rohit',
-    role: 'Analytics & Insights Lead',
-    image: '/Team Images/ishu.jpg',
-    bio: 'Rohit turns field and digital data into actionable insights that guide smarter outreach and measurable campaign outcomes.'
+    bio: 'Driving growth through strategic partnerships and strong client relationships. Tanishka combines business insight with dynamic communication.'
   }
 ]
 
@@ -162,7 +163,7 @@ export default function Team() {
       ></span>
 
       <Container className="team-layout">
-        <div className="flex flex-col items-start py-20">
+        <div className="flex flex-col items-start py-8">
           <span className="mb-2 block text-sm font-medium uppercase leading-tight tracking-wide text-pvo-blue sm:text-base">
             PEOPLE. PURPOSE. PERFORMANCE
           </span>
@@ -209,7 +210,7 @@ export default function Team() {
           </div>
         </div>
 
-        <div className="flex h-full min-h-0 min-w-0 flex-col py-20">
+        <div className="flex h-full min-h-0 min-w-0 flex-col py-8">
           <article className="relative mb-3 flex shrink-0 flex-col gap-3 overflow-hidden rounded-photo bg-pvo-navy-deep p-2.5 shadow-pvo-sm sm:flex-row md:mb-4 md:gap-4 md:rounded-card-md md:p-3 xl:mb-5 xl:rounded-card xl:gap-4 xl:p-4">
             <span
               className="pointer-events-none absolute -right-6 -top-6 size-20 rounded-full border-pvo-blue md:-right-8 md:-top-10 md:size-24 border-[20px] xl:-right-11 xl:-top-11 xl:size-30"
